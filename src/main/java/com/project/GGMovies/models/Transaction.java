@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Home
+ * @author PcStratos
  */
 @Entity
 @Table(name = "transaction")
@@ -58,7 +58,6 @@ public class Transaction implements Serializable {
     @Column(name = "type")
     private String type;
     @JoinColumns({
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")})
     @ManyToOne(optional = false)
     private User user;

@@ -26,7 +26,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Home
+ * @author PcStratos
  */
 @Entity
 @Table(name = "user")
@@ -68,7 +68,7 @@ public class User implements Serializable {
     @Column(name = "enabled")
     private short enabled;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private List list;
+    private UserList userList;
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     @ManyToOne(optional = false)
     private Role roleId;
@@ -148,12 +148,12 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    public List getList() {
-        return list;
+    public UserList getUserList() {
+        return userList;
     }
 
-    public void setList(List list) {
-        this.list = list;
+    public void setUserList(UserList userList) {
+        this.userList = userList;
     }
 
     public Role getRoleId() {

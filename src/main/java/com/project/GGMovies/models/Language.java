@@ -20,7 +20,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Home
+ * @author PcStratos
  */
 @Entity
 @Table(name = "language")
@@ -39,7 +39,7 @@ public class Language implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "languageId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "language")
     private Set<Film> filmSet;
 
     public Language() {

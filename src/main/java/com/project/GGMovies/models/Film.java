@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -28,7 +29,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Home
+ * @author PcStratos
  */
 @Entity
 @Table(name = "film")
@@ -82,11 +83,12 @@ public class Film implements Serializable {
     private boolean adultOnly;
     @ManyToMany(mappedBy = "filmSet")
     private Set<Category> categorySet;
-    @JoinColumn(name = "language_id", referencedColumnName = "language_id")
+    @JoinColumns({
+        @JoinColumn(name = "language_id", referencedColumnName = "language_id")})
     @ManyToOne(optional = false)
-    private Language languageId;
+    private Language language;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "film")
-    private Set<List> listSet;
+    private Set<UserList> userListSet;
 
     public Film() {
     }
@@ -195,20 +197,20 @@ public class Film implements Serializable {
         this.categorySet = categorySet;
     }
 
-    public Language getLanguageId() {
-        return languageId;
+    public Language getLanguage() {
+        return language;
     }
 
-    public void setLanguageId(Language languageId) {
-        this.languageId = languageId;
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
-    public Set<List> getListSet() {
-        return listSet;
+    public Set<UserList> getUserListSet() {
+        return userListSet;
     }
 
-    public void setListSet(Set<List> listSet) {
-        this.listSet = listSet;
+    public void setUserListSet(Set<UserList> userListSet) {
+        this.userListSet = userListSet;
     }
 
     @Override

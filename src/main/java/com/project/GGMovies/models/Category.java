@@ -21,7 +21,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Home
+ * @author PcStratos
  */
 @Entity
 @Table(name = "category")

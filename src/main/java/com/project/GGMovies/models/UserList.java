@@ -17,45 +17,44 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Home
+ * @author PcStratos
  */
 @Entity
-@Table(name = "list")
+@Table(name = "user_list")
 @NamedQueries({
-    @NamedQuery(name = "List.findAll", query = "SELECT l FROM List l"),
-    @NamedQuery(name = "List.findByUserId", query = "SELECT l FROM List l WHERE l.listPK.userId = :userId"),
-    @NamedQuery(name = "List.findByFilmId", query = "SELECT l FROM List l WHERE l.listPK.filmId = :filmId")})
-public class List implements Serializable {
+    @NamedQuery(name = "UserList.findAll", query = "SELECT u FROM UserList u"),
+    @NamedQuery(name = "UserList.findByUserId", query = "SELECT u FROM UserList u WHERE u.userListPK.userId = :userId"),
+    @NamedQuery(name = "UserList.findByFilmId", query = "SELECT u FROM UserList u WHERE u.userListPK.filmId = :filmId")})
+public class UserList implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
-    protected ListPK listPK;
+    protected UserListPK userListPK;
     @JoinColumn(name = "film_id", referencedColumnName = "film_id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private Film film;
     @JoinColumns({
-        @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false),
         @JoinColumn(name = "user_id", referencedColumnName = "user_id", insertable = false, updatable = false)})
     @OneToOne(optional = false)
     private User user;
 
-    public List() {
+    public UserList() {
     }
 
-    public List(ListPK listPK) {
-        this.listPK = listPK;
+    public UserList(UserListPK userListPK) {
+        this.userListPK = userListPK;
     }
 
-    public List(int userId, int filmId) {
-        this.listPK = new ListPK(userId, filmId);
+    public UserList(int userId, int filmId) {
+        this.userListPK = new UserListPK(userId, filmId);
     }
 
-    public ListPK getListPK() {
-        return listPK;
+    public UserListPK getUserListPK() {
+        return userListPK;
     }
 
-    public void setListPK(ListPK listPK) {
-        this.listPK = listPK;
+    public void setUserListPK(UserListPK userListPK) {
+        this.userListPK = userListPK;
     }
 
     public Film getFilm() {
@@ -77,18 +76,18 @@ public class List implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (listPK != null ? listPK.hashCode() : 0);
+        hash += (userListPK != null ? userListPK.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof List)) {
+        if (!(object instanceof UserList)) {
             return false;
         }
-        List other = (List) object;
-        if ((this.listPK == null && other.listPK != null) || (this.listPK != null && !this.listPK.equals(other.listPK))) {
+        UserList other = (UserList) object;
+        if ((this.userListPK == null && other.userListPK != null) || (this.userListPK != null && !this.userListPK.equals(other.userListPK))) {
             return false;
         }
         return true;
@@ -96,7 +95,7 @@ public class List implements Serializable {
 
     @Override
     public String toString() {
-        return "com.project.GGMovies.models.List[ listPK=" + listPK + " ]";
+        return "com.project.GGMovies.models.UserList[ userListPK=" + userListPK + " ]";
     }
     
 }

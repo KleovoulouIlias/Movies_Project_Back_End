@@ -70,4 +70,85 @@ public class FilmDto {
         this.filmAdultOnly = film.getAdultOnly();
     }
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFilmTitle() {
+        return filmTitle;
+    }
+
+    public void setFilmTitle(String filmTitle) {
+        this.filmTitle = filmTitle;
+    }
+
+    public String getFilmDescription() {
+        return filmDescription;
+    }
+
+    public void setFilmDescription(String filmDescription) {
+        this.filmDescription = filmDescription;
+    }
+
+    public Date getFilmReleaseDate() {
+        return filmReleaseDate;
+    }
+
+    public void setFilmReleaseDate(Date filmReleaseDate) {
+        this.filmReleaseDate = filmReleaseDate;
+    }
+
+    public Short getFilmLength() {
+        return filmLength;
+    }
+
+    public void setFilmLength(Short filmLength) {
+        this.filmLength = filmLength;
+    }
+
+    public BigDecimal getFilmRating() {
+        return filmRating;
+    }
+
+    public void setFilmRating(BigDecimal filmRating) {
+        this.filmRating = filmRating;
+    }
+
+    public String getFilmBackgorundUrl() {
+        return filmBackgorundUrl;
+    }
+
+    public void setFilmBackgorundUrl(String filmBackgorundUrl) {
+        this.filmBackgorundUrl = filmBackgorundUrl;
+    }
+
+    public String getFilmPosterUrl() {
+        return filmPosterUrl;
+    }
+
+    public void setFilmPosterUrl(String filmPosterUrl) {
+        this.filmPosterUrl = filmPosterUrl;
+    }
+
+    public BigDecimal getFilmPopularity() {
+        return filmPopularity;
+    }
+
+    public void setFilmPopularity(BigDecimal filmPopularity) {
+        this.filmPopularity = filmPopularity;
+    }
+
+    public boolean isFilmAdultOnly() {
+        return filmAdultOnly;
+    }
+
+    public void setFilmAdultOnly(boolean filmAdultOnly) {
+        this.filmAdultOnly = filmAdultOnly;
+    }
+    
+    
 }
