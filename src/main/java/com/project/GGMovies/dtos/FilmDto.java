@@ -7,7 +7,6 @@ package com.project.GGMovies.dtos;
 import com.project.GGMovies.models.Category;
 import com.project.GGMovies.models.Film;
 import com.project.GGMovies.models.Language;
-import com.project.GGMovies.models.UserList;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;

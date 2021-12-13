@@ -68,7 +68,7 @@ public class User implements Serializable {
     @Column(name = "enabled")
     private short enabled;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
-    private UserList userList;
+    private List list;
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     @ManyToOne(optional = false)
     private Role roleId;
@@ -148,12 +148,12 @@ public class User implements Serializable {
         this.enabled = enabled;
     }
 
-    public UserList getUserList() {
-        return userList;
+    public List getList() {
+        return list;
     }
 
-    public void setUserList(UserList userList) {
-        this.userList = userList;
+    public void setList(List list) {
+        this.list = list;
     }
 
     public Role getRoleId() {

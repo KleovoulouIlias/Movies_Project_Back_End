@@ -86,7 +86,7 @@ public class Film implements Serializable {
     @ManyToOne(optional = false)
     private Language languageId;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "film")
-    private Set<UserList> userListSet;
+    private Set<List> listSet;
 
     public Film() {
     }
@@ -203,12 +203,12 @@ public class Film implements Serializable {
         this.languageId = languageId;
     }
 
-    public Set<UserList> getUserListSet() {
-        return userListSet;
+    public Set<List> getListSet() {
+        return listSet;
     }
 
-    public void setUserListSet(Set<UserList> userListSet) {
-        this.userListSet = userListSet;
+    public void setListSet(Set<List> listSet) {
+        this.listSet = listSet;
     }
 
     @Override

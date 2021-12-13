@@ -14,7 +14,7 @@ import javax.persistence.Embeddable;
  * @author Home
  */
 @Embeddable
-public class UserListPK implements Serializable {
+public class ListPK implements Serializable {
 
     @Basic(optional = false)
     @Column(name = "user_id")
@@ -23,10 +23,10 @@ public class UserListPK implements Serializable {
     @Column(name = "film_id")
     private int filmId;
 
-    public UserListPK() {
+    public ListPK() {
     }
 
-    public UserListPK(int userId, int filmId) {
+    public ListPK(int userId, int filmId) {
         this.userId = userId;
         this.filmId = filmId;
     }
@@ -58,10 +58,10 @@ public class UserListPK implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UserListPK)) {
+        if (!(object instanceof ListPK)) {
             return false;
         }
-        UserListPK other = (UserListPK) object;
+        ListPK other = (ListPK) object;
         if (this.userId != other.userId) {
             return false;
         }
@@ -73,7 +73,7 @@ public class UserListPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.project.GGMovies.models.UserListPK[ userId=" + userId + ", filmId=" + filmId + " ]";
+        return "com.project.GGMovies.models.ListPK[ userId=" + userId + ", filmId=" + filmId + " ]";
     }
     
 }
