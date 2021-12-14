@@ -11,23 +11,37 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class FilmController {
+public class UserController {
     
     @Autowired 
     IFilmService iFilmService;
     
     @GetMapping("/movies")
     public ResponseEntity<List<FilmDto>>getAllMovies(){
-    return  ResponseEntity.ok().body(iFilmService.getAllMovies());
+        return  ResponseEntity.ok().body(iFilmService.getAllMovies());
     }
     
     @GetMapping("/movies/{id}")
+
     public ResponseEntity<List<FilmDto>>getAllMoviesByCategoryId(@PathVariable("id") Integer id){
-    return  ResponseEntity.ok().body(iFilmService.getAllMoviesByCategoryId(id));
+        return  ResponseEntity.ok().body(iFilmService.getAllMoviesByCategoryId(id));
     }
     
     @GetMapping("/{user_id}")
     public ResponseEntity<List<FilmDto>>getUserListByUserId(@PathVariable("user_id") Integer id){   
-    return  ResponseEntity.ok().body(iFilmService.getUserListByUserId(id));
+        return  ResponseEntity.ok().body(iFilmService.getUserListByUserId(id));
     }
+
+    @GetMapping("/search/{title}")
+    public ResponseEntity<List<FilmDto>>getMoviesByTitle(@PathVariable("title") String title){
+        return ResponseEntity.ok().body(iFilmService.getMoviesByTitle(title));
+    }
+    
+    @GetMapping("/search/language/{language_id}")
+    public ResponseEntity<List<FilmDto>>getMoviesByLanguageId(@PathVariable("language_id") Integer id){
+         return ResponseEntity.ok().body(iFilmService.getMoviesByLanguageId(id));
+    }
+    
 }
+   
+

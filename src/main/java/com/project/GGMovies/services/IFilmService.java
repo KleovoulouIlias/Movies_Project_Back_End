@@ -10,4 +10,10 @@ public interface IFilmService {
      public List<FilmDto> getAllMovies();
      public List<FilmDto> getAllMoviesByCategoryId(Integer id);
      public List<FilmDto> getUserListByUserId(Integer id);
+     public List<FilmDto> getMoviesByTitle(String title);
+     public List<FilmDto> getMoviesByLanguageId(Integer id);
+
+     
+     
+
 }
