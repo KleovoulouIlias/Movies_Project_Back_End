@@ -70,7 +70,7 @@ public class Film implements Serializable {
     @Column(name = "rating")
     private BigDecimal rating;
     @Basic(optional = false)
-    @Column(name = "backgorund_url")
+    @Column(name = "background_url")
     private String backgorundUrl;
     @Basic(optional = false)
     @Column(name = "poster_url")

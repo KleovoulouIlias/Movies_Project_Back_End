@@ -26,4 +26,24 @@ public class FilmServiceImpl implements IFilmService {
         return result;
     }
     
+    public List<FilmDto> getAllMoviesByCategoryId(Integer id){
+        
+       List<FilmDto> result = new ArrayList(); 
+       List<Film> allMoviesFromDb = filmRepository.getMoviesByCategoryId(id);
+        for (Film film : allMoviesFromDb) {
+            result.add(new FilmDto(film));
+        }
+        return result;
+    }
+    
+    public List<FilmDto> getUserListByUserId(Integer id){
+        
+       List<FilmDto> result = new ArrayList(); 
+       List<Film> allMoviesFromDb = filmRepository.getUserListByUserId(id);
+        for (Film film : allMoviesFromDb) {
+            result.add(new FilmDto(film));
+        }
+        return result;
+    }
+    
 }
