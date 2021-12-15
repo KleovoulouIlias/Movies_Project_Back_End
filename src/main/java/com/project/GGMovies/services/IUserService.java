@@ -7,5 +7,7 @@ import java.util.List;
 public interface IUserService {
     
     public List<UserDto> getAllUsers();
-    public UserDto checkUserById(String email);
+    public boolean isUsedEmail(String email);
+    public void insertUser(UserDto newUser);
+    public UserDto getUserById(Integer id);
 }

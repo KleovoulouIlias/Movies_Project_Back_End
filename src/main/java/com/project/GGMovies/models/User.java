@@ -5,6 +5,7 @@
 package com.project.GGMovies.models;
 
 import com.project.GGMovies.dtos.UserDto;
+import com.project.GGMovies.services.IRoleService;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -24,6 +25,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -41,6 +43,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "User.findByLocked", query = "SELECT u FROM User u WHERE u.locked = :locked"),
     @NamedQuery(name = "User.findByEnabled", query = "SELECT u FROM User u WHERE u.enabled = :enabled")})
 public class User implements Serializable {
+    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -55,7 +58,7 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
     @Basic(optional = false)
-    @Column(name = "created")
+    @Column(name = "created", insertable = false, updatable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date created;
     @Basic(optional = false)
@@ -85,11 +88,10 @@ public class User implements Serializable {
     
     public User(UserDto user){
         this.email = user.getUserEmail();
-        //this.roleId = 
         this.password = user.getUserPassword();
         this.expires = user.getDateExpires();
-        this.locked = user.getIsLocked();
-        this.enabled = user.getIsEnabled();
+        this.locked = user.getIsIsLocked();
+        this.enabled = user.getIsIsEnabled();
     }
 
     public User(Integer userId, String email, String password, Date created, Date expires, boolean locked, boolean enabled) {

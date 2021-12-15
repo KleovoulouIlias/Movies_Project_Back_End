@@ -4,6 +4,7 @@
  */
 package com.project.GGMovies.models;
 
+import com.project.GGMovies.dtos.RoleDto;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -43,6 +44,10 @@ public class Role implements Serializable {
     private Set<User> userSet;
 
     public Role() {
+    }
+    public Role(RoleDto roleDto) {
+        this.roleId = roleDto.getId();
+        this.name = roleDto.getName();
     }
 
     public Role(Integer roleId) {

@@ -13,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserDto {
     
     private Integer id;
-    private String UserEmail;
-    private String UserPassword;
-    private Date DateCreated;
-    private Date DateExpires;
+    private String userEmail;
+    private String userPassword;
+    private Date dateCreated;
+    private Date dateExpires;
     private boolean isLocked;
     private boolean isEnabled;
     //private List<FilmDto> userList;
@@ -28,16 +28,28 @@ public class UserDto {
     
     //(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId)
             
-     public UserDto(Integer id, String UserEmail, String password,Date DateCreated, Date DateExpires, boolean isLocked, boolean isEnabled, Integer roleId) {
+     public UserDto(Integer id, String userEmail, String password,Date dateCreated, Date dateExpires, boolean isLocked, boolean isEnabled, Integer roleId) {
         this.id = id;
-        this.UserEmail = UserEmail;
-        this.UserPassword = password;
-        this.DateCreated = DateCreated;
-        this.DateExpires = DateExpires;
+        this.userEmail = userEmail;
+        this.userPassword = password;
+        this.dateCreated = dateCreated;
+        this.dateExpires = dateExpires;
         this.isLocked = isLocked;
         this.isEnabled = isEnabled;
         this.roleId = roleId;
-    }  
+    }
+
+    public UserDto(String userEmail, String userPassword, Date dateExpires, boolean isLocked, boolean isEnabled, Integer roleId) {
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.dateExpires = dateExpires;
+        this.isLocked = isLocked;
+        this.isEnabled = isEnabled;
+        this.roleId = roleId;
+    }
+
+    
+     
 
     public UserDto(Integer id){
         this.id = id;
@@ -80,38 +92,38 @@ public class UserDto {
     }
 
     public String getUserEmail() {
-        return UserEmail;
+        return userEmail;
     }
 
-    public void setUserEmail(String UserEmail) {
-        this.UserEmail = UserEmail;
+    public void setUserEmail(String userEmail) {
+        this.userEmail = userEmail;
     }
 
     public String getUserPassword() {
-        return UserPassword;
+        return userPassword;
     }
 
-    public void setUserPassword(String UserPassword) {
-        this.UserPassword = UserPassword;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
     public Date getDateCreated() {
-        return DateCreated;
+        return dateCreated;
     }
 
-    public void setDateCreated(Date DateCreated) {
-        this.DateCreated = DateCreated;
+    public void setDateCreated(Date dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
     public Date getDateExpires() {
-        return DateExpires;
+        return dateExpires;
     }
 
-    public void setDateExpires(Date DateExpires) {
-        this.DateExpires = DateExpires;
+    public void setDateExpires(Date dateExpires) {
+        this.dateExpires = dateExpires;
     }
 
-    public boolean getIsLocked() {
+    public boolean getIsIsLocked() {
         return isLocked;
     }
 
@@ -119,13 +131,23 @@ public class UserDto {
         this.isLocked = isLocked;
     }
 
-    public boolean getIsEnabled() {
+    public boolean getIsIsEnabled() {
         return isEnabled;
     }
 
     public void setIsEnabled(boolean isEnabled) {
         this.isEnabled = isEnabled;
     }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
+    }
+
+
 
 //    public List<FilmDto> getUserList() {
 //        return userList;
