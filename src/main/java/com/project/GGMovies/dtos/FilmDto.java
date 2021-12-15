@@ -4,30 +4,11 @@
  */
 package com.project.GGMovies.dtos;
 
-import com.project.GGMovies.models.Category;
 import com.project.GGMovies.models.Film;
-import com.project.GGMovies.models.Language;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.Set;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
-/**
- *
- * @author Home
- */
+
 public class FilmDto {
 
     private Integer id;

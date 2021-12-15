@@ -13,7 +13,4 @@ public interface IFilmService {
      public List<FilmDto> getMoviesByTitle(String title);
      public List<FilmDto> getMoviesByLanguageId(Integer id);
 
-     
-     
-
 }
