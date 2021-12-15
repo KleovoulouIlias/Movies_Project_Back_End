@@ -4,6 +4,7 @@
  */
 package com.project.GGMovies.models;
 
+import com.project.GGMovies.dtos.UserDto;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -63,10 +64,10 @@ public class User implements Serializable {
     private Date expires;
     @Basic(optional = false)
     @Column(name = "locked")
-    private short locked;
+    private boolean locked;
     @Basic(optional = false)
     @Column(name = "enabled")
-    private short enabled;
+    private boolean enabled;
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "user")
     private UserList userList;
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
@@ -81,8 +82,17 @@ public class User implements Serializable {
     public User(Integer userId) {
         this.userId = userId;
     }
+    
+    public User(UserDto user){
+        this.email = user.getUserEmail();
+        //this.roleId = 
+        this.password = user.getUserPassword();
+        this.expires = user.getDateExpires();
+        this.locked = user.getIsLocked();
+        this.enabled = user.getIsEnabled();
+    }
 
-    public User(Integer userId, String email, String password, Date created, Date expires, short locked, short enabled) {
+    public User(Integer userId, String email, String password, Date created, Date expires, boolean locked, boolean enabled) {
         this.userId = userId;
         this.email = email;
         this.password = password;
@@ -132,19 +142,19 @@ public class User implements Serializable {
         this.expires = expires;
     }
 
-    public short getLocked() {
+    public boolean getLocked() {
         return locked;
     }
 
-    public void setLocked(short locked) {
+    public void setLocked(boolean locked) {
         this.locked = locked;
     }
 
-    public short getEnabled() {
+    public boolean getEnabled() {
         return enabled;
     }
 
-    public void setEnabled(short enabled) {
+    public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
