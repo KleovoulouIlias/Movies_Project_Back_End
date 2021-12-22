@@ -4,17 +4,16 @@ import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.models.Role;
 import com.project.GGMovies.models.User;
 import com.project.GGMovies.repos.UserRepository;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl implements IUserService{
-    
+public class UserServiceImpl implements IUserService {
+
     @Autowired
     UserRepository userRepository;
-    
+
     @Autowired
     IRoleService IRoleService;
 
@@ -25,17 +24,16 @@ public class UserServiceImpl implements IUserService{
     }
 
     @Override
-    public boolean isUsedEmail(String email){
-        if(userRepository.checkUserById(email)!=null){
+    public boolean isUsedEmail(String email) {
+        if (userRepository.checkUserById(email) != null) {
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
-    
+
     @Override
-    public void insertUser(UserDto newUser){
+    public void insertUser(UserDto newUser) {
         User userToInsert = new User(newUser);
         userToInsert.setRoleId(new Role(IRoleService.getRoleById(newUser.getRole())));
         userRepository.saveAndFlush(userToInsert);
@@ -46,5 +44,9 @@ public class UserServiceImpl implements IUserService{
         return userRepository.getUserById(id);
     }
     
-    
+    @Override
+    public void deleteUser(Integer id) {
+      userRepository.deleteById(id);
+    }
+   
 }

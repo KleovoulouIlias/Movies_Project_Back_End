@@ -12,5 +12,7 @@ public interface IFilmService {
      public List<FilmDto> getUserListByUserId(Integer id);
      public List<FilmDto> getMoviesByTitle(String title);
      public List<FilmDto> getMoviesByLanguageId(Integer id);
-
+     public boolean filmExists(String title, String description);
+     public void insertMovie(FilmDto newFilm);
+     public void deleteMovie(Integer id);     
 }

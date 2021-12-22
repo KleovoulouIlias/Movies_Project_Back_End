@@ -4,9 +4,12 @@
  */
 package com.project.GGMovies.dtos;
 
+import com.project.GGMovies.models.Category;
 import com.project.GGMovies.models.Film;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
+
 
 
 public class FilmDto {
@@ -18,13 +21,31 @@ public class FilmDto {
     private Short filmLength;
     private BigDecimal filmRating;
     private String filmBackgorundUrl;
+    private Set<Category> categories;
     private String filmPosterUrl;
     private BigDecimal filmPopularity;
     private boolean filmAdultOnly;
 
     public FilmDto() {
     }
+    
+    public FilmDto(Integer id){
+        this.id = id;
+    }
 
+    public FilmDto(Integer id, String filmTitle, String filmDescription, Date filmReleaseDate, Short filmLength, BigDecimal filmRating, String filmBackgorundUrl, String filmPosterUrl, BigDecimal filmPopularity, boolean filmAdultOnly, Set<Category> categories) {
+        this.id = id;
+        this.filmTitle = filmTitle;
+        this.filmDescription = filmDescription;
+        this.filmReleaseDate = filmReleaseDate;
+        this.filmLength = filmLength;
+        this.filmRating = filmRating;
+        this.filmBackgorundUrl = filmBackgorundUrl;
+        this.filmPosterUrl = filmPosterUrl;
+        this.filmPopularity = filmPopularity;
+        this.filmAdultOnly = filmAdultOnly;
+        this.categories = categories;
+    }
     public FilmDto(Integer id, String filmTitle, String filmDescription, Date filmReleaseDate, Short filmLength, BigDecimal filmRating, String filmBackgorundUrl, String filmPosterUrl, BigDecimal filmPopularity, boolean filmAdultOnly) {
         this.id = id;
         this.filmTitle = filmTitle;
@@ -36,6 +57,7 @@ public class FilmDto {
         this.filmPosterUrl = filmPosterUrl;
         this.filmPopularity = filmPopularity;
         this.filmAdultOnly = filmAdultOnly;
+        
     }
     
     public FilmDto(Film film){
@@ -49,6 +71,7 @@ public class FilmDto {
         this.filmPosterUrl = film.getPosterUrl();
         this.filmPopularity = film.getPopularity();
         this.filmAdultOnly = film.getAdultOnly();
+        this.categories = film.getCategorySet();
     }
 
     public Integer getId() {
@@ -129,6 +152,14 @@ public class FilmDto {
 
     public void setFilmAdultOnly(boolean filmAdultOnly) {
         this.filmAdultOnly = filmAdultOnly;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
     
     

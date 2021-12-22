@@ -3,22 +3,17 @@ package com.project.GGMovies.controllers;
 import com.project.GGMovies.dtos.FilmDto;
 import com.project.GGMovies.dtos.RoleDto;
 import com.project.GGMovies.dtos.UserDto;
-import com.project.GGMovies.models.Role;
-import com.project.GGMovies.models.User;
 import com.project.GGMovies.services.IFilmService;
 import com.project.GGMovies.services.IRoleService;
 import com.project.GGMovies.services.IUserService;
-import com.project.GGMovies.services.UserServiceImpl;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -37,6 +32,24 @@ public class AdminController {
     @GetMapping("/movies")
     public ResponseEntity<List<FilmDto>>getAllMovies(){
         return  ResponseEntity.ok().body(iFilmService.getAllMovies());
+    }
+    
+    @PostMapping("/insertMovie")
+    public ResponseEntity<FilmDto> insertMovie(@RequestBody FilmDto film){
+         System.out.println("dsdsdsds");
+        if(!iFilmService.filmExists(film.getFilmTitle(),film.getFilmDescription())){
+            System.out.println("gfgfggfdgd");
+            iFilmService.insertMovie(film);
+            return ResponseEntity.ok().body(film);
+        }
+        else{
+            return ResponseEntity.badRequest().body(film);
+        }
+    }
+    
+    @GetMapping("/deleteMovie/{film_id}")
+     public void deleteMovie(@PathVariable(value="film_id") Integer id){
+        iFilmService.deleteMovie(id);
     }
     
     @GetMapping("/users")
@@ -70,4 +83,10 @@ public class AdminController {
             return ResponseEntity.badRequest().body(user);
         }
     }
+    @GetMapping("/deleteUser/{user_id}")
+    public void deleteUser(@PathVariable(value="user_id") Integer id){
+         iUserService.deleteUser(id);
+    }
+    // public List<UserDto> getUsersByRoleId(Integer roleId);
+    
 }

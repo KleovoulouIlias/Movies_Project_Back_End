@@ -4,6 +4,8 @@
  */
 package com.project.GGMovies.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.GGMovies.dtos.FilmDto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -12,6 +14,7 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +29,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.Fetch;
 
 /**
  *
@@ -82,6 +86,7 @@ public class Film implements Serializable {
     @Column(name = "adult_only")
     private boolean adultOnly;
     @ManyToMany(mappedBy = "filmSet")
+    @JsonManagedReference
     private Set<Category> categorySet;
     @JoinColumns({
         @JoinColumn(name = "language_id", referencedColumnName = "language_id")})
@@ -97,6 +102,18 @@ public class Film implements Serializable {
         this.filmId = filmId;
     }
 
+  public Film(FilmDto film){
+        this.filmId = film.getId();
+        this.title = film.getFilmTitle();
+        this.description = film.getFilmDescription();
+        this.releaseDate = film.getFilmReleaseDate();
+        this.rating = film.getFilmRating();
+        this.backgorundUrl = film.getFilmBackgorundUrl();
+        this.posterUrl = film.getFilmPosterUrl();
+        this.popularity = film.getFilmPopularity();
+        this.adultOnly = film.isFilmAdultOnly();
+    }    
+    
     public Film(Integer filmId, String title, String description, Date releaseDate, BigDecimal rating, String backgorundUrl, String posterUrl, BigDecimal popularity, boolean adultOnly) {
         this.filmId = filmId;
         this.title = title;

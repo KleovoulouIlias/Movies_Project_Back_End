@@ -4,11 +4,13 @@
  */
 package com.project.GGMovies.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -44,6 +46,7 @@ public class Category implements Serializable {
         @JoinColumn(name = "category_id", referencedColumnName = "category_id")}, inverseJoinColumns = {
         @JoinColumn(name = "film_id", referencedColumnName = "film_id")})
     @ManyToMany
+    @JsonBackReference
     private Set<Film> filmSet;
 
     public Category() {

@@ -1,14 +1,8 @@
 package com.project.GGMovies.dtos;
 
-import com.project.GGMovies.models.Role;
 import com.project.GGMovies.models.Transaction;
-import com.project.GGMovies.models.User;
-import com.project.GGMovies.models.UserList;
-import com.project.GGMovies.services.IFilmService;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class UserDto {
     

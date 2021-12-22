@@ -16,7 +16,6 @@ public class FilmServiceImpl implements IFilmService {
 
     @Override
     public List<FilmDto> getAllMovies() {
-
         List<FilmDto> result = new ArrayList();
         List<Film> allMoviesFromDb = filmRepository.findAll();
         for (Film film : allMoviesFromDb) {
@@ -58,16 +57,33 @@ public class FilmServiceImpl implements IFilmService {
         return result;
     }
 
-
     @Override
-     public List<FilmDto> getMoviesByLanguageId(Integer id){
-         
+    public List<FilmDto> getMoviesByLanguageId(Integer id) {
+
         List<FilmDto> result = new ArrayList();
         List<Film> allMoviesFromDb = filmRepository.getMoviesByLanguageId(id);
         for (Film film : allMoviesFromDb) {
             result.add(new FilmDto(film));
         }
         return result;
+    }
+
+    @Override
+    public void insertMovie(FilmDto newFilm) {
+        filmRepository.save(new Film(newFilm));
+    }
+
+    @Override
+    public void deleteMovie(Integer id) {
+        filmRepository.deleteById(id);
+    }
+
+    @Override
+    public boolean filmExists(String title, String description) {
+        if (filmRepository.checkFilmByTitleAndDescription(title, description) != null) {
+            return true;
+        }
+        return false;
     }
 
 }
