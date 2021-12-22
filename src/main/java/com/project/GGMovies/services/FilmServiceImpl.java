@@ -1,11 +1,20 @@
 package com.project.GGMovies.services;
 
 import com.project.GGMovies.dtos.FilmDto;
+import com.project.GGMovies.models.Category;
 import com.project.GGMovies.models.Film;
 import com.project.GGMovies.repos.FilmRepository;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +22,12 @@ public class FilmServiceImpl implements IFilmService {
 
     @Autowired
     FilmRepository filmRepository;
+    
+    @Autowired 
+    ICategoryService iCategoryService;
+    
+    @Autowired
+    ILanguageService iLanguageService; 
 
     @Override
     public List<FilmDto> getAllMovies() {
@@ -84,6 +99,25 @@ public class FilmServiceImpl implements IFilmService {
             return true;
         }
         return false;
+    }
+
+   /* @Override
+    @Transactional
+    public List<FilmDto> getTopRatedMoviesByCategoryId(Integer id) {
+        
+        return filmRepository.getTopRatedMoviesByCategoryId(id, PageRequest.of(0, 3));
+    } */
+
+    @Override
+    @Transactional
+    public List<FilmDto> getTopRatedMoviesByCategoryId(Integer id) {
+        List<FilmDto> result = filmRepository.getTopRatedMoviesByCategoryId(id, PageRequest.of(0, 3));
+        for (FilmDto film : result) {
+            film.setCategories(iCategoryService.geCategoryByMovieId(film.getId()));
+            film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
+        }
+        
+        return result;
     }
 
 }

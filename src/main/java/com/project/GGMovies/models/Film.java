@@ -4,6 +4,7 @@
  */
 package com.project.GGMovies.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.GGMovies.dtos.FilmDto;
 import java.io.Serializable;
@@ -91,6 +92,7 @@ public class Film implements Serializable {
     @JoinColumns({
         @JoinColumn(name = "language_id", referencedColumnName = "language_id")})
     @ManyToOne(optional = false)
+    @JsonBackReference
     private Language language;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "film")
     private Set<UserList> userListSet;
@@ -112,6 +114,7 @@ public class Film implements Serializable {
         this.posterUrl = film.getFilmPosterUrl();
         this.popularity = film.getFilmPopularity();
         this.adultOnly = film.isFilmAdultOnly();
+        //this.categorySet = film.getCategories();
     }    
     
     public Film(Integer filmId, String title, String description, Date releaseDate, BigDecimal rating, String backgorundUrl, String posterUrl, BigDecimal popularity, boolean adultOnly) {

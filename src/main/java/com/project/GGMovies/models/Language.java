@@ -4,6 +4,8 @@
  */
 package com.project.GGMovies.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -40,6 +42,7 @@ public class Language implements Serializable {
     @Column(name = "name")
     private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "language")
+    @JsonManagedReference
     private Set<Film> filmSet;
 
     public Language() {

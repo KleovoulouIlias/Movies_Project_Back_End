@@ -2,7 +2,10 @@ package com.project.GGMovies.repos;
 
 import com.project.GGMovies.dtos.FilmDto;
 import com.project.GGMovies.models.Film;
+
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,8 +16,8 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     @Query("select f from Film f join f.categorySet c where c.categoryId=?1")
     public List<Film> getMoviesByCategoryId(Integer id);
     
-    //to do:
-//    public List<Film> getTopRatedMoviesByCategoryId(Integer id);
+   @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId, f.title, f.description, f.releaseDate, f.length, f.rating, f.backgorundUrl, f.posterUrl, f.popularity, f.adultOnly) from Film f join f.categorySet c where c.categoryId=?1 order by f.rating asc")
+   public List<FilmDto> getTopRatedMoviesByCategoryId(Integer id, Pageable pageable);
 //    
 //    
 //    public List<Film> getMostPopularMoviesByCategoryId(Integer id);

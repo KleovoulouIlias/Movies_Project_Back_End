@@ -4,10 +4,13 @@
  */
 package com.project.GGMovies.dtos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.GGMovies.models.Category;
 import com.project.GGMovies.models.Film;
+import com.project.GGMovies.models.Language;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 
@@ -21,10 +24,13 @@ public class FilmDto {
     private Short filmLength;
     private BigDecimal filmRating;
     private String filmBackgorundUrl;
-    private Set<Category> categories;
+    //@JsonIgnore
+    private List<CategoryDto> categories;
     private String filmPosterUrl;
     private BigDecimal filmPopularity;
     private boolean filmAdultOnly;
+    //@JsonIgnore
+    private LanguageDto filmLanguage;
 
     public FilmDto() {
     }
@@ -33,7 +39,21 @@ public class FilmDto {
         this.id = id;
     }
 
-    public FilmDto(Integer id, String filmTitle, String filmDescription, Date filmReleaseDate, Short filmLength, BigDecimal filmRating, String filmBackgorundUrl, String filmPosterUrl, BigDecimal filmPopularity, boolean filmAdultOnly, Set<Category> categories) {
+  /*  public FilmDto(Integer id, String filmTitle, String filmDescription, Date filmReleaseDate, Short filmLength, BigDecimal filmRating, String filmBackgorundUrl, String filmPosterUrl, BigDecimal filmPopularity, boolean filmAdultOnly, LanguageDto filmLanguage) {
+        this.id = id;
+        this.filmTitle = filmTitle;
+        this.filmDescription = filmDescription;
+        this.filmReleaseDate = filmReleaseDate;
+        this.filmLength = filmLength;
+        this.filmRating = filmRating;
+        this.filmBackgorundUrl = filmBackgorundUrl;
+        this.filmPosterUrl = filmPosterUrl;
+        this.filmPopularity = filmPopularity;
+        this.filmAdultOnly = filmAdultOnly;
+        //this.filmLanguage = filmLanguage;
+    } */
+
+    public FilmDto(Integer id, String filmTitle, String filmDescription, Date filmReleaseDate, Short filmLength, BigDecimal filmRating, String filmBackgorundUrl, String filmPosterUrl, BigDecimal filmPopularity, boolean filmAdultOnly, List<CategoryDto> categories) {
         this.id = id;
         this.filmTitle = filmTitle;
         this.filmDescription = filmDescription;
@@ -71,7 +91,8 @@ public class FilmDto {
         this.filmPosterUrl = film.getPosterUrl();
         this.filmPopularity = film.getPopularity();
         this.filmAdultOnly = film.getAdultOnly();
-        this.categories = film.getCategorySet();
+        //this.categoryIds = film.getCategorySet();
+        //this.filmLanguage = film.getLanguage();
     }
 
     public Integer getId() {
@@ -154,13 +175,24 @@ public class FilmDto {
         this.filmAdultOnly = filmAdultOnly;
     }
 
-    public Set<Category> getCategories() {
+    public List<CategoryDto> getCategories() {
         return categories;
     }
 
-    public void setCategories(Set<Category> categories) {
+    public void setCategories(List<CategoryDto> categories) {
         this.categories = categories;
+    } 
+
+    public LanguageDto getFilmLanguage() {
+        return filmLanguage;
     }
-    
+
+    public void setFilmLanguage(LanguageDto filmLanguage) {
+        this.filmLanguage = filmLanguage;
+    }
+
+   
+
+   
     
 }
