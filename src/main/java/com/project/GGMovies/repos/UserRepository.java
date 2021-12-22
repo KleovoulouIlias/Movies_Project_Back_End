@@ -20,5 +20,6 @@ public interface UserRepository extends JpaRepository<User, Integer>{
     @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.password, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.userId=?1")
     public UserDto getUserById(Integer id);
     
-    
+    //to do:
+    // public List<UserDto> getUsersByRoleId(Integer roleId);
 }

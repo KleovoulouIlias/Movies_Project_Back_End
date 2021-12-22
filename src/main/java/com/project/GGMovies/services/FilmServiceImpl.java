@@ -16,7 +16,6 @@ public class FilmServiceImpl implements IFilmService {
 
     @Override
     public List<FilmDto> getAllMovies() {
-
         List<FilmDto> result = new ArrayList();
         List<Film> allMoviesFromDb = filmRepository.findAll();
         for (Film film : allMoviesFromDb) {
