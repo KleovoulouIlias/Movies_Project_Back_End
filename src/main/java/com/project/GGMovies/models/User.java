@@ -4,6 +4,8 @@
  */
 package com.project.GGMovies.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.services.IRoleService;
 import java.io.Serializable;
@@ -76,6 +78,7 @@ public class User implements Serializable {
     @JoinColumn(name = "role_id", referencedColumnName = "role_id")
     @ManyToOne(optional = false)
     private Role roleId;
+    //@JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<Transaction> transactionSet;
 

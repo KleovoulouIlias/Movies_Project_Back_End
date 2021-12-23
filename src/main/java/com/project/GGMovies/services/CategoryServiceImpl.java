@@ -23,10 +23,12 @@ public class CategoryServiceImpl implements ICategoryService {
 
     
     @Override
-    public List<CategoryDto> geCategoryByMovieId(Integer id) {
-        return  categoryRepository.geCategoryByMovieId(id);
+    public List<CategoryDto> getCategoryByMovieId(Integer id) {
+        return  categoryRepository.getCategoryByMovieId(id);
 
    
     }
+
+   
     
 }

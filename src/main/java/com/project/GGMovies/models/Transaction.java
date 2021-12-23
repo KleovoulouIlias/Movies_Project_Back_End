@@ -4,6 +4,8 @@
  */
 package com.project.GGMovies.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -57,6 +59,7 @@ public class Transaction implements Serializable {
     @Basic(optional = false)
     @Column(name = "type")
     private String type;
+    //@JsonManagedReference
     @JoinColumns({
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")})
     @ManyToOne(optional = false)

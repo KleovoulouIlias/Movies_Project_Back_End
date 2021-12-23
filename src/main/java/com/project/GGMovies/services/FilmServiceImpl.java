@@ -28,6 +28,8 @@ public class FilmServiceImpl implements IFilmService {
     
     @Autowired
     ILanguageService iLanguageService; 
+    
+ 
 
     @Override
     public List<FilmDto> getAllMovies() {
@@ -113,11 +115,35 @@ public class FilmServiceImpl implements IFilmService {
     public List<FilmDto> getTopRatedMoviesByCategoryId(Integer id) {
         List<FilmDto> result = filmRepository.getTopRatedMoviesByCategoryId(id, PageRequest.of(0, 3));
         for (FilmDto film : result) {
-            film.setCategories(iCategoryService.geCategoryByMovieId(film.getId()));
+            film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
             film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
         }
         
         return result;
     }
 
+    @Override
+    @Transactional
+    public List<FilmDto> getMostPopularMoviesByCategoryId(Integer id) {
+        List<FilmDto> result = filmRepository.getMostPopularMoviesByCategoryId(id, PageRequest.of(0, 3));
+        for (FilmDto film : result) {
+            film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
+            film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
+        }
+        
+        return result;
+    }
+    
+    @Override
+    @Transactional
+    public List<FilmDto> getMostRecentMoviesByCategoryId(Integer id) {
+        List<FilmDto> result = filmRepository.getMostRecentMoviesByCategoryId(id, PageRequest.of(0, 3));
+        for (FilmDto film : result) {
+            film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
+            film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
+        }
+        
+        return result;
+    }
+    
 }

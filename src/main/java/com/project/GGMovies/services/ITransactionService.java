@@ -5,16 +5,13 @@
  */
 package com.project.GGMovies.services;
 
-import com.project.GGMovies.dtos.CategoryDto;
+import com.project.GGMovies.dtos.TransactionDto;
 import java.util.List;
 
 /**
  *
  * @author odi
  */
-
-public interface ICategoryService {
-    
-    public List<CategoryDto> getCategoryByMovieId(Integer id);
-    
+public interface ITransactionService {
+    public List<TransactionDto> getAllTransactionsByUserId(Integer id);
 }

@@ -3,13 +3,17 @@ package com.project.GGMovies.controllers;
 import com.project.GGMovies.dtos.CategoryDto;
 import com.project.GGMovies.dtos.FilmDto;
 import com.project.GGMovies.dtos.RoleDto;
+import com.project.GGMovies.dtos.TransactionDto;
 import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.models.Category;
+import com.project.GGMovies.models.User;
 import com.project.GGMovies.services.ICategoryService;
 import com.project.GGMovies.services.IFilmService;
 import com.project.GGMovies.services.IRoleService;
+import com.project.GGMovies.services.ITransactionService;
 import com.project.GGMovies.services.IUserService;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -36,9 +40,12 @@ public class AdminController {
 
     @Autowired
     IRoleService iRoleService;
+
+    @Autowired
+    ICategoryService iCategoryService;
     
     @Autowired 
-    ICategoryService iCategoryService;
+    ITransactionService iTransactionService;
 
     @GetMapping("/movies")
     public ResponseEntity<List<FilmDto>> getAllMovies() {
@@ -106,9 +113,34 @@ public class AdminController {
 
     @GetMapping("/getCategoies/{film_id}")
     public ResponseEntity<List<CategoryDto>> geCategoryByMovieId(@PathVariable(value = "film_id") Integer id) {
-        
-        return ResponseEntity.ok().body(iCategoryService.geCategoryByMovieId(id));
 
+        return ResponseEntity.ok().body(iCategoryService.getCategoryByMovieId(id));
+    }
+
+    @GetMapping("/topPopular/{category_id}")
+    public ResponseEntity<List<FilmDto>> mostPopularMoviesByCategoryId(@PathVariable(value = "category_id") Integer id) {
+
+        return ResponseEntity.ok().body(iFilmService.getMostPopularMoviesByCategoryId(id));
+    }
+
+    @GetMapping("/mostRecent/{category_id}")
+    public ResponseEntity<List<FilmDto>> mostRecentMoviesByCategoryId(@PathVariable(value = "category_id") Integer id) {
+
+        return ResponseEntity.ok().body(iFilmService.getMostPopularMoviesByCategoryId(id));
+    }
+
+    @GetMapping("/userByRole/{user_id}")
+    public ResponseEntity<List<UserDto>> getUsersByRoleId(@PathVariable(value = "user_id") Integer id) {
+
+        return ResponseEntity.ok().body(iUserService.getUsersByRoleId(id));
+    }
+    
+    
+    @GetMapping("/transaction/{user_id}")
+    public ResponseEntity<List<TransactionDto>> getAllTransactionsByUserId(@PathVariable(value = "user_id") Integer id) {
+        List<TransactionDto>  result = iTransactionService.getAllTransactionsByUserId(id);
+       
+        return ResponseEntity.ok().body(result);
     }
 
 }

@@ -42,6 +42,18 @@ public class UserDto {
         this.roleId = roleId;
     }
 
+    public UserDto(Integer id, String userEmail, String userPassword, Date dateCreated, Date dateExpires, boolean isLocked, boolean isEnabled, Integer roleId, Set<Transaction> transactions) {
+        this.id = id;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.dateCreated = dateCreated;
+        this.dateExpires = dateExpires;
+        this.isLocked = isLocked;
+        this.isEnabled = isEnabled;
+        this.roleId = roleId;
+        this.transactions = transactions;
+    }
+
     
      
 

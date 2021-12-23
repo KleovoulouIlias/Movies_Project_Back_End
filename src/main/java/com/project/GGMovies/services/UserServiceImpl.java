@@ -48,5 +48,10 @@ public class UserServiceImpl implements IUserService {
     public void deleteUser(Integer id) {
       userRepository.deleteById(id);
     }
+
+    @Override
+    public List<UserDto> getUsersByRoleId(Integer id) {
+        return userRepository.getUsersByRoleId(id);
+    }
    
 }
