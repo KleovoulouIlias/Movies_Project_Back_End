@@ -13,5 +13,5 @@ import java.util.List;
  * @author odi
  */
 public interface ITransactionService {
-    public List<TransactionDto> getAllTransactionsByUserId(Integer id);
+    public List<TransactionDto> getAllTransactions();
 }

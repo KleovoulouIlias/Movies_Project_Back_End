@@ -159,9 +159,9 @@ public class AdminController {
     }
     
     
-    @GetMapping("/transaction/{user_id}")
-    public ResponseEntity<List<TransactionDto>> getAllTransactionsByUserId(@PathVariable(value = "user_id") Integer id) {
-        List<TransactionDto>  result = iTransactionService.getAllTransactionsByUserId(id);
+    @GetMapping("/getAllTransactions")
+    public ResponseEntity<List<TransactionDto>> getAllTransactions() {
+        List<TransactionDto>  result = iTransactionService.getAllTransactions();
        
         return ResponseEntity.ok().body(result);
     }

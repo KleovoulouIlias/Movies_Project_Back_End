@@ -17,6 +17,6 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface TransactionRepository extends JpaRepository<Transaction, Integer>{
     
-    @Query("SELECT new com.project.GGMovies.dtos.TransactionDto(t.transactionsId, t.dateTime, t.amount, t.status, t.type, t.user.userId) from Transaction t where t.user.userId = ?1")
-    public List<TransactionDto> getAllTransactionsByUserId(Integer id);
+    @Query("SELECT new com.project.GGMovies.dtos.TransactionDto(t.transactionsId, t.dateTime, t.amount, t.status, t.type, t.user.email) from Transaction t")
+    public List<TransactionDto> getAllTransactions();
 }

@@ -1,6 +1,7 @@
 package com.project.GGMovies.dtos;
 
 import com.project.GGMovies.models.Transaction;
+import com.project.GGMovies.models.User;
 import java.util.Date;
 import java.util.Set;
 
@@ -13,11 +14,15 @@ public class UserDto {
     private Date dateExpires;
     private boolean isLocked;
     private boolean isEnabled;
-    //private List<FilmDto> userList;
     private Integer roleId;
     private Set<Transaction> transactions;
 
     public UserDto() {
+    }
+    
+    public UserDto(User user) {
+        this.id = user.getUserId();
+        this.userEmail = user.getEmail();
     }
     
     //(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId)

@@ -16,40 +16,32 @@ import java.util.Date;
  */
 public class TransactionDto {
     
-    Integer id;
-    Date date;
-    BigDecimal amountDto;
-    short statusDto;
-    String typeDto;
-    Integer userDto;
-
-    public TransactionDto(Integer id, Date date, BigDecimal amountDto, short statusDto, String typeDto) {
-        this.id = id;
-        this.date = date;
-        this.amountDto = amountDto;
-        this.statusDto = statusDto;
-        this.typeDto = typeDto;
-    }
-
-    public TransactionDto(Integer id, Date date, BigDecimal amountDto, short statusDto, String typeDto, Integer userDto) {
-        this.id = id;
-        this.date = date;
-        this.amountDto = amountDto;
-        this.statusDto = statusDto;
-        this.typeDto = typeDto;
-        this.userDto = userDto;
-    }
+    private Integer id;
+    private Date transactionDate;
+    private BigDecimal transactionAmount;
+    private boolean transactionStatus;
+    private String transactionType;
+    private String userEmail;
 
     public TransactionDto() {
     }
     
-    public TransactionDto(Transaction transaction) {
-        this.id = transaction.getTransactionsId();
-        this.date = transaction.getDateTime();
-        this.amountDto = transaction.getAmount();
-        this.statusDto = transaction.getStatus();
-        this.typeDto = transaction.getType();
-        this.userDto = transaction.getUser().getUserId(); 
+//    public TransactionDto(Transaction transaction) {
+//        this.id = transaction.getTransactionsId();
+//        this.transactionDate = transaction.getDateTime();
+//        this.transactionAmount = transaction.getAmount();
+//        this.transactionStatus = transaction.getStatus();
+//        this.transactionType = transaction.getType();
+//        this.user = new UserDto(transaction.getUser());
+//    }
+
+    public TransactionDto(Integer id, Date transactionDate, BigDecimal transactionAmount, boolean transactionStatus, String transactionType, String userEmail) {
+        this.id = id;
+        this.transactionDate = transactionDate;
+        this.transactionAmount = transactionAmount;
+        this.transactionStatus = transactionStatus;
+        this.transactionType = transactionType;
+        this.userEmail = userEmail;
     }
 
     public Integer getId() {
@@ -60,45 +52,47 @@ public class TransactionDto {
         this.id = id;
     }
 
-    public Integer getUserDto() {
-        return userDto;
+    public Date getTransactionDate() {
+        return transactionDate;
     }
 
-    public void setUserDto(Integer userDto) {
-        this.userDto = userDto;
+    public void setTransactionDate(Date transactionDate) {
+        this.transactionDate = transactionDate;
     }
 
-    public Date getDate() {
-        return date;
+    public BigDecimal getTransactionAmount() {
+        return transactionAmount;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setTransactionAmount(BigDecimal transactionAmount) {
+        this.transactionAmount = transactionAmount;
     }
 
-    public BigDecimal getAmountDto() {
-        return amountDto;
+    public boolean isTransactionStatus() {
+        return transactionStatus;
     }
 
-    public void setAmountDto(BigDecimal amountDto) {
-        this.amountDto = amountDto;
+    public void setTransactionStatus(boolean transactionStatus) {
+        this.transactionStatus = transactionStatus;
     }
 
-    public short getStatusDto() {
-        return statusDto;
+    public String getTransactionType() {
+        return transactionType;
     }
 
-    public void setStatusDto(short statusDto) {
-        this.statusDto = statusDto;
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 
-    public String getTypeDto() {
-        return typeDto;
+    public String getUser() {
+        return userEmail;
     }
 
-    public void setTypeDto(String typeDto) {
-        this.typeDto = typeDto;
+    public void setUser(String userEmail) {
+        this.userEmail = userEmail;
     }
+    
 
+   
     
 }

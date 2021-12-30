@@ -55,7 +55,7 @@ public class Transaction implements Serializable {
     private BigDecimal amount;
     @Basic(optional = false)
     @Column(name = "status")
-    private short status;
+    private boolean status;
     @Basic(optional = false)
     @Column(name = "type")
     private String type;
@@ -72,13 +72,13 @@ public class Transaction implements Serializable {
         this.transactionsId = transactionsId;
     }
 
-    public Transaction(Integer transactionsId, Date dateTime, BigDecimal amount, short status, String type) {
-        this.transactionsId = transactionsId;
-        this.dateTime = dateTime;
-        this.amount = amount;
-        this.status = status;
-        this.type = type;
-    }
+//    public Transaction(Integer transactionsId, Date dateTime, BigDecimal amount, short status, String type) {
+//        this.transactionsId = transactionsId;
+//        this.dateTime = dateTime;
+//        this.amount = amount;
+//        this.status = status;
+//        this.type = type;
+//    }
 
     public Integer getTransactionsId() {
         return transactionsId;
@@ -104,11 +104,11 @@ public class Transaction implements Serializable {
         this.amount = amount;
     }
 
-    public short getStatus() {
+    public boolean getStatus() {
         return status;
     }
 
-    public void setStatus(short status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 

@@ -26,8 +26,8 @@ public class TransactionSeriveImpl implements ITransactionService{
     IUserService iUserService;
     
    @Override
-    public List<TransactionDto> getAllTransactionsByUserId(Integer id) {
-        List<TransactionDto> result =  transactionRepository.getAllTransactionsByUserId(id);
+    public List<TransactionDto> getAllTransactions() {
+        List<TransactionDto> result =  transactionRepository.getAllTransactions();
         return result;
     } 
     
