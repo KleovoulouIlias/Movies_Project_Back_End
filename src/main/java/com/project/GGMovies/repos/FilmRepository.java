@@ -16,16 +16,25 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     @Query("select f from Film f join f.categorySet c where c.categoryId=?1")
     public List<Film> getMoviesByCategoryId(Integer id);
 
+    @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId, f.title, f.description, f.releaseDate, f.length, f.rating, f.backgorundUrl, f.posterUrl, f.popularity, f.adultOnly) from Film f order by f.rating desc")
+    public List<FilmDto> getTopRatedMovies(Pageable pageable);
+    
     @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId, f.title, f.description, f.releaseDate, f.length, f.rating, f.backgorundUrl, f.posterUrl, f.popularity, f.adultOnly) from Film f join f.categorySet c where c.categoryId=?1 order by f.rating desc")
     public List<FilmDto> getTopRatedMoviesByCategoryId(Integer id, Pageable pageable);
-//    
+   
 
     @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId, f.title, f.description, f.releaseDate, f.length, f.rating, f.backgorundUrl, f.posterUrl, f.popularity, f.adultOnly) from Film f join f.categorySet c where c.categoryId=?1 order by f.popularity desc")
     public List<FilmDto> getMostPopularMoviesByCategoryId(Integer id, Pageable pageable);
-//    
+    
+    @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId, f.title, f.description, f.releaseDate, f.length, f.rating, f.backgorundUrl, f.posterUrl, f.popularity, f.adultOnly) from Film f order by f.popularity desc")
+    public List<FilmDto> getMostPopularMovies(Pageable pageable);
+   
 
     @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId, f.title, f.description, f.releaseDate, f.length, f.rating, f.backgorundUrl, f.posterUrl, f.popularity, f.adultOnly) from Film f join f.categorySet c where c.categoryId=?1 order by f.releaseDate desc")
     public List<FilmDto> getMostRecentMoviesByCategoryId(Integer id,Pageable pageable);
+    
+    @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId, f.title, f.description, f.releaseDate, f.length, f.rating, f.backgorundUrl, f.posterUrl, f.popularity, f.adultOnly) from Film f order by f.releaseDate desc")
+    public List<FilmDto> getMostRecentMovies(Pageable pageable);
 
     @Query("select f from Film f join f.userListSet l where l.user.userId=?1")
     public List<Film> getUserListByUserId(Integer id);

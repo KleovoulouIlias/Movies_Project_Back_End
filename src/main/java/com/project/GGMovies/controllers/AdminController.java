@@ -60,14 +60,17 @@ public class AdminController {
 
     @PostMapping(value = "/insertMovie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FilmDto> insertMovie(@RequestBody FilmDto film) {
-        System.out.println("dsdsdsds");
         if (!iFilmService.filmExists(film.getFilmTitle(), film.getFilmDescription())) {
-            System.out.println("gfgfggfdgd");
             iFilmService.insertMovie(film);
             return ResponseEntity.ok().body(film);
         } else {
             return ResponseEntity.badRequest().body(film);
         }
+    }
+    @PostMapping(value = "/updateMovie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<FilmDto> updateMovie(@RequestBody FilmDto film) { 
+            iFilmService.insertMovie(film);
+            return ResponseEntity.ok().body(film);
     }
 
     @GetMapping("/deleteMovie/{film_id}")
@@ -116,14 +119,28 @@ public class AdminController {
     public ResponseEntity<List<FilmDto>> topRatedMoviesCategoryId(@PathVariable(value = "category_id") Integer id) {
         return ResponseEntity.ok().body(iFilmService.getTopRatedMoviesByCategoryId(id));
     }
+    
+    @GetMapping("/topRatedMovies")
+    public ResponseEntity<List<FilmDto>> getTopRatedMovies() {
+        return ResponseEntity.ok().body(iFilmService.getTopRatedMovies());
+    }
+    
+    @GetMapping("/mostPopularMovies")
+    public ResponseEntity<List<FilmDto>> getMostPopularMovies() {
+        return ResponseEntity.ok().body(iFilmService.getMostPopularMovies());
+    }
+    @GetMapping("/mostRecentMovies")
+    public ResponseEntity<List<FilmDto>> getMostRecentMovies() {
+        return ResponseEntity.ok().body(iFilmService.getMostRecentMovies());
+    }
 
-    @GetMapping("/getCategoies/{film_id}")
-    public ResponseEntity<List<CategoryDto>> geCategoryByMovieId(@PathVariable(value = "film_id") Integer id) {
+    @GetMapping("/getCategories/{film_id}")
+    public ResponseEntity<List<CategoryDto>> getCategoryByMovieId(@PathVariable(value = "film_id") Integer id) {
 
         return ResponseEntity.ok().body(iCategoryService.getCategoryByMovieId(id));
     }
 
-    @GetMapping("/topPopular/{category_id}")
+    @GetMapping("/mostPopular/{category_id}")
     public ResponseEntity<List<FilmDto>> mostPopularMoviesByCategoryId(@PathVariable(value = "category_id") Integer id) {
 
         return ResponseEntity.ok().body(iFilmService.getMostPopularMoviesByCategoryId(id));

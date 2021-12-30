@@ -1,20 +1,19 @@
 package com.project.GGMovies.services;
 
+import com.project.GGMovies.dtos.CategoryDto;
 import com.project.GGMovies.dtos.FilmDto;
 import com.project.GGMovies.models.Category;
 import com.project.GGMovies.models.Film;
+import com.project.GGMovies.models.Language;
+import com.project.GGMovies.repos.CategoryRepository;
 import com.project.GGMovies.repos.FilmRepository;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,6 +21,9 @@ public class FilmServiceImpl implements IFilmService {
 
     @Autowired
     FilmRepository filmRepository;
+    
+    @Autowired
+    CategoryRepository categoryRepository;
     
     @Autowired 
     ICategoryService iCategoryService;
@@ -36,7 +38,10 @@ public class FilmServiceImpl implements IFilmService {
         List<FilmDto> result = new ArrayList();
         List<Film> allMoviesFromDb = filmRepository.findAll();
         for (Film film : allMoviesFromDb) {
-            result.add(new FilmDto(film));
+            FilmDto temp = new FilmDto(film);
+            temp.setCategories(iCategoryService.getCategoryByMovieId(temp.getId()));
+            temp.setFilmLanguage(iLanguageService.getLanguageByMovieId(temp.getId()));
+            result.add(temp);
         }
         return result;
     }
@@ -88,7 +93,19 @@ public class FilmServiceImpl implements IFilmService {
     @Override
     @Transactional
     public void insertMovie(FilmDto newFilm) {
-        filmRepository.save(new Film(newFilm));
+        Film temp = new Film(newFilm);
+        temp.setLanguage(new Language(newFilm.getFilmLanguage()));
+        System.out.println(temp.getLanguage());
+        Set<Category> categorySet = new HashSet();
+        filmRepository.save(temp);
+        for(CategoryDto categoryDto : newFilm.getCategories()){
+            Category tempCategory =iCategoryService.getCategoryById(categoryDto.getId());
+            tempCategory.getFilmSet().add(temp);
+            categoryRepository.save(tempCategory);
+            categorySet.add(tempCategory);
+        }
+        temp.setCategorySet(categorySet);
+        System.out.println(temp.getCategorySet());
     }
 
     @Override
@@ -104,17 +121,10 @@ public class FilmServiceImpl implements IFilmService {
         return false;
     }
 
-   /* @Override
-    @Transactional
-    public List<FilmDto> getTopRatedMoviesByCategoryId(Integer id) {
-        
-        return filmRepository.getTopRatedMoviesByCategoryId(id, PageRequest.of(0, 3));
-    } */
-
     @Override
     @Transactional
     public List<FilmDto> getTopRatedMoviesByCategoryId(Integer id) {
-        List<FilmDto> result = filmRepository.getTopRatedMoviesByCategoryId(id, PageRequest.of(0, 3));
+        List<FilmDto> result = filmRepository.getTopRatedMoviesByCategoryId(id, PageRequest.of(0, 13));
         for (FilmDto film : result) {
             film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
             film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
@@ -126,7 +136,7 @@ public class FilmServiceImpl implements IFilmService {
     @Override
     @Transactional
     public List<FilmDto> getMostPopularMoviesByCategoryId(Integer id) {
-        List<FilmDto> result = filmRepository.getMostPopularMoviesByCategoryId(id, PageRequest.of(0, 3));
+        List<FilmDto> result = filmRepository.getMostPopularMoviesByCategoryId(id, PageRequest.of(0, 13));
         for (FilmDto film : result) {
             film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
             film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
@@ -138,7 +148,41 @@ public class FilmServiceImpl implements IFilmService {
     @Override
     @Transactional
     public List<FilmDto> getMostRecentMoviesByCategoryId(Integer id) {
-        List<FilmDto> result = filmRepository.getMostRecentMoviesByCategoryId(id, PageRequest.of(0, 3));
+        List<FilmDto> result = filmRepository.getMostRecentMoviesByCategoryId(id, PageRequest.of(0, 13));
+        for (FilmDto film : result) {
+            film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
+            film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
+        }
+        
+        return result;
+    }
+
+    @Override
+    public List<FilmDto> getTopRatedMovies() {
+        System.out.println("sdfdfd");
+        List<FilmDto> result = filmRepository.getTopRatedMovies(PageRequest.of(0, 13));
+        for (FilmDto film : result) {
+            film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
+            film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
+        }
+        
+        return result;
+    }
+    @Override
+    public List<FilmDto> getMostPopularMovies() {
+        System.out.println("sdfdfd");
+        List<FilmDto> result = filmRepository.getMostPopularMovies(PageRequest.of(0, 13));
+        for (FilmDto film : result) {
+            film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
+            film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
+        }
+        
+        return result;
+    }
+    @Override
+    public List<FilmDto> getMostRecentMovies() {
+        System.out.println("sdfdfd");
+        List<FilmDto> result = filmRepository.getMostRecentMovies(PageRequest.of(0, 13));
         for (FilmDto film : result) {
             film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
             film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));

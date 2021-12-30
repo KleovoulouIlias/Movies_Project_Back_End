@@ -5,6 +5,7 @@
 package com.project.GGMovies.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.project.GGMovies.dtos.CategoryDto;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -50,6 +51,11 @@ public class Category implements Serializable {
     private Set<Film> filmSet;
 
     public Category() {
+    }
+    
+    public Category(CategoryDto categoryDto) {
+        this.categoryId = categoryDto.getId();
+        this.name = categoryDto.getCategoryName();
     }
 
     public Category(Integer categoryId) {

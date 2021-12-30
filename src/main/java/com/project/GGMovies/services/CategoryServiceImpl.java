@@ -39,6 +39,11 @@ public class CategoryServiceImpl implements ICategoryService {
         return result;
     }
 
+    @Override
+    public Category getCategoryById(Integer id) {
+        return categoryRepository.getCategoryById(id);
+    }
+
    
     
 }

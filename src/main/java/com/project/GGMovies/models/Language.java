@@ -6,6 +6,7 @@ package com.project.GGMovies.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.project.GGMovies.dtos.LanguageDto;
 import java.io.Serializable;
 import java.util.Set;
 import javax.persistence.Basic;
@@ -46,6 +47,11 @@ public class Language implements Serializable {
     private Set<Film> filmSet;
 
     public Language() {
+    }
+    
+    public Language(LanguageDto languageDto) {
+        this.languageId = languageDto.getId();
+        this.name = languageDto.getName();
     }
 
     public Language(Integer languageId) {

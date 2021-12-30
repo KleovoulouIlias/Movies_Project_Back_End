@@ -4,14 +4,10 @@
  */
 package com.project.GGMovies.dtos;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.project.GGMovies.models.Category;
 import com.project.GGMovies.models.Film;
-import com.project.GGMovies.models.Language;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 
 
@@ -24,12 +20,10 @@ public class FilmDto {
     private Short filmLength;
     private BigDecimal filmRating;
     private String filmBackgorundUrl;
-    //@JsonIgnore
     private List<CategoryDto> categories;
     private String filmPosterUrl;
     private BigDecimal filmPopularity;
     private boolean filmAdultOnly;
-    //@JsonIgnore
     private LanguageDto filmLanguage;
 
     public FilmDto() {

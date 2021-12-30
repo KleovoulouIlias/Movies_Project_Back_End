@@ -24,4 +24,7 @@ public interface IFilmService {
      public List<FilmDto> getTopRatedMoviesByCategoryId(Integer id);
      public List<FilmDto> getMostPopularMoviesByCategoryId(Integer id);
      public List<FilmDto> getMostRecentMoviesByCategoryId(Integer id);
+     public List<FilmDto> getTopRatedMovies();
+     public List<FilmDto> getMostPopularMovies();
+     public List<FilmDto> getMostRecentMovies();
 }
