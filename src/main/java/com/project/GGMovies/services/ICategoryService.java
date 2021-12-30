@@ -16,5 +16,6 @@ import java.util.List;
 public interface ICategoryService {
     
     public List<CategoryDto> getCategoryByMovieId(Integer id);
+    public List<CategoryDto> getAllCategories();
     
 }

@@ -18,7 +18,7 @@ public class CategoryDto {
 
     public CategoryDto() {
     }
-    
+
     public CategoryDto(Category category) {
         this.id = category.getCategoryId();
         this.categoryName = category.getName();

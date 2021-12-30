@@ -86,6 +86,7 @@ public class FilmServiceImpl implements IFilmService {
     }
 
     @Override
+    @Transactional
     public void insertMovie(FilmDto newFilm) {
         filmRepository.save(new Film(newFilm));
     }

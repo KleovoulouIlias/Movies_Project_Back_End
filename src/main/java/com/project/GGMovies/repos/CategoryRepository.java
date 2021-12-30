@@ -7,7 +7,6 @@ package com.project.GGMovies.repos;
 
 import com.project.GGMovies.dtos.CategoryDto;
 import com.project.GGMovies.models.Category;
-import com.project.GGMovies.models.Film;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
