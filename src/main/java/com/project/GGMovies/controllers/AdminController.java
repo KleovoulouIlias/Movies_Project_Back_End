@@ -57,6 +57,11 @@ public class AdminController {
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
         return ResponseEntity.ok().body(iCategoryService.getAllCategories());
     }
+    
+    @GetMapping("/getCategory/{category_name}")
+    public ResponseEntity<CategoryDto> getCategoryByName(@PathVariable("category_name") String name) {
+        return ResponseEntity.ok().body(iCategoryService.getCategoryByName(name));
+    }
 
     @PostMapping(value = "/insertMovie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<FilmDto> insertMovie(@RequestBody FilmDto film) {

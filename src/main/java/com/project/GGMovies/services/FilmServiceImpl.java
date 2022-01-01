@@ -52,7 +52,10 @@ public class FilmServiceImpl implements IFilmService {
         List<FilmDto> result = new ArrayList();
         List<Film> allMoviesFromDb = filmRepository.getMoviesByCategoryId(id);
         for (Film film : allMoviesFromDb) {
-            result.add(new FilmDto(film));
+            FilmDto temp = new FilmDto(film);
+            temp.setCategories(iCategoryService.getCategoryByMovieId(temp.getId()));
+            temp.setFilmLanguage(iLanguageService.getLanguageByMovieId(temp.getId()));
+            result.add(temp);
         }
         return result;
     }
@@ -63,7 +66,10 @@ public class FilmServiceImpl implements IFilmService {
         List<FilmDto> result = new ArrayList();
         List<Film> allMoviesFromDb = filmRepository.getUserListByUserId(id);
         for (Film film : allMoviesFromDb) {
-            result.add(new FilmDto(film));
+            FilmDto temp = new FilmDto(film);
+            temp.setCategories(iCategoryService.getCategoryByMovieId(temp.getId()));
+            temp.setFilmLanguage(iLanguageService.getLanguageByMovieId(temp.getId()));
+            result.add(temp);
         }
         return result;
     }
@@ -74,7 +80,10 @@ public class FilmServiceImpl implements IFilmService {
         List<FilmDto> result = new ArrayList();
         List<Film> allMoviesFromDb = filmRepository.getMoviesByTitle(title);
         for (Film film : allMoviesFromDb) {
-            result.add(new FilmDto(film));
+            FilmDto temp = new FilmDto(film);
+            temp.setCategories(iCategoryService.getCategoryByMovieId(temp.getId()));
+            temp.setFilmLanguage(iLanguageService.getLanguageByMovieId(temp.getId()));
+            result.add(temp);
         }
         return result;
     }
@@ -85,7 +94,10 @@ public class FilmServiceImpl implements IFilmService {
         List<FilmDto> result = new ArrayList();
         List<Film> allMoviesFromDb = filmRepository.getMoviesByLanguageId(id);
         for (Film film : allMoviesFromDb) {
-            result.add(new FilmDto(film));
+            FilmDto temp = new FilmDto(film);
+            temp.setCategories(iCategoryService.getCategoryByMovieId(temp.getId()));
+            temp.setFilmLanguage(iLanguageService.getLanguageByMovieId(temp.getId()));
+            result.add(temp);
         }
         return result;
     }
@@ -159,7 +171,6 @@ public class FilmServiceImpl implements IFilmService {
 
     @Override
     public List<FilmDto> getTopRatedMovies() {
-        System.out.println("sdfdfd");
         List<FilmDto> result = filmRepository.getTopRatedMovies(PageRequest.of(0, 13));
         for (FilmDto film : result) {
             film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
@@ -170,7 +181,6 @@ public class FilmServiceImpl implements IFilmService {
     }
     @Override
     public List<FilmDto> getMostPopularMovies() {
-        System.out.println("sdfdfd");
         List<FilmDto> result = filmRepository.getMostPopularMovies(PageRequest.of(0, 13));
         for (FilmDto film : result) {
             film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
@@ -181,12 +191,32 @@ public class FilmServiceImpl implements IFilmService {
     }
     @Override
     public List<FilmDto> getMostRecentMovies() {
-        System.out.println("sdfdfd");
         List<FilmDto> result = filmRepository.getMostRecentMovies(PageRequest.of(0, 13));
         for (FilmDto film : result) {
             film.setCategories(iCategoryService.getCategoryByMovieId(film.getId()));
             film.setFilmLanguage(iLanguageService.getLanguageByMovieId(film.getId()));
         }
+        
+        return result;
+    }
+
+
+    @Override
+    public FilmDto getMovieById(Integer id) {
+        Film movieFromDb = filmRepository.getMovieById(id);
+            FilmDto result = new FilmDto(movieFromDb);
+            result.setCategories(iCategoryService.getCategoryByMovieId(result.getId()));
+            result.setFilmLanguage(iLanguageService.getLanguageByMovieId(result.getId()));
+        return result;
+    }
+
+    @Override
+    public FilmDto getRandomMovie() {
+        List<Film> randomFilm = filmRepository.getRandomMovie(PageRequest.of(0, 1));
+        FilmDto result = new FilmDto(randomFilm.get(0));
+        result.setCategories(iCategoryService.getCategoryByMovieId(result.getId()));
+        result.setFilmLanguage(iLanguageService.getLanguageByMovieId(result.getId()));
+
         
         return result;
     }

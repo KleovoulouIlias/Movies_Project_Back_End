@@ -44,6 +44,11 @@ public class CategoryServiceImpl implements ICategoryService {
         return categoryRepository.getCategoryById(id);
     }
 
+    @Override
+    public CategoryDto getCategoryByName(String categoryName) {
+        return categoryRepository.getCategoryByName(categoryName);
+    }
+
    
     
 }

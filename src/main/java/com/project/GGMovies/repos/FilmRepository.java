@@ -41,11 +41,17 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
 
     @Query("select f from Film f where f.title like %?1%")
     public List<Film> getMoviesByTitle(String title);
+    
+    @Query("select f from Film f where f.filmId = ?1")
+    public Film getMovieById(Integer id);
 
     @Query("select f from Film f where f.language.languageId=?1")
     public List<Film> getMoviesByLanguageId(Integer id);
 
     @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId) from Film f where f.title=?1 and f.description=?2")
     public FilmDto checkFilmByTitleAndDescription(String title, String description);
+    
+    @Query("select f from Film f order by rand()")
+    public List<Film> getRandomMovie(Pageable pageable);
 
 }

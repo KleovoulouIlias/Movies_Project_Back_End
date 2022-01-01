@@ -27,4 +27,6 @@ public interface IFilmService {
      public List<FilmDto> getTopRatedMovies();
      public List<FilmDto> getMostPopularMovies();
      public List<FilmDto> getMostRecentMovies();
+     public FilmDto getRandomMovie();
+     public FilmDto getMovieById(Integer id);
 }
