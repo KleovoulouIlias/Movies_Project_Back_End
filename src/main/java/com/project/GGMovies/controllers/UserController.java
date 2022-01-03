@@ -33,6 +33,11 @@ public class UserController {
         return  ResponseEntity.ok().body(randomMovie);
     }
     
+    @GetMapping("/categories")
+    public ResponseEntity<List<CategoryDto>> getAllCategories() {
+        return ResponseEntity.ok().body(iCategoryService.getAllCategories());
+    }
+    
     @GetMapping("/movies/{id}")
 
     public ResponseEntity<List<FilmDto>>getAllMoviesByCategoryId(@PathVariable("id") Integer id){
