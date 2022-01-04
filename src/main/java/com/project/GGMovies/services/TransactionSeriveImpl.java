@@ -36,5 +36,10 @@ public class TransactionSeriveImpl implements ITransactionService{
     public List<SalesStatsDto> getMonthlySalesStats() {
         return transactionRepository.getMonthlySalesStats();
     }
+
+    @Override
+    public SalesStatsDto getThisMonthSales() {
+        return transactionRepository.getThisMonthSales();
+    }
     
 }

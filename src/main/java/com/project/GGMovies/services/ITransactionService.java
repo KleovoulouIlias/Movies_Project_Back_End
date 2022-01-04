@@ -16,4 +16,5 @@ import java.util.List;
 public interface ITransactionService {
     public List<TransactionDto> getAllTransactions();
     public List<SalesStatsDto> getMonthlySalesStats();
+    public SalesStatsDto getThisMonthSales();
 }

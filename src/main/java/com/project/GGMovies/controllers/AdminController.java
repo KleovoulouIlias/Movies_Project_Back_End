@@ -185,4 +185,10 @@ public class AdminController {
        
         return ResponseEntity.ok().body(result);
     }
+    @GetMapping("/getThisMonthSales")
+    public ResponseEntity<SalesStatsDto> getThisMonthSales() {
+        SalesStatsDto  result = iTransactionService.getThisMonthSales();
+       
+        return ResponseEntity.ok().body(result);
+    }
 }

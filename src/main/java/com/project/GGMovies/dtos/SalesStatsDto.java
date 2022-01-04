@@ -14,6 +14,9 @@ public class SalesStatsDto {
         this.month = month;
         this.sum = sum;
     }
+    public SalesStatsDto(BigDecimal sum) {
+        this.sum = sum;
+    }
 
     public Integer getMonth() {
         return month;
