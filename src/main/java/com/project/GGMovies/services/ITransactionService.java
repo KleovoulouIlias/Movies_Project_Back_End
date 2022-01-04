@@ -14,7 +14,14 @@ import java.util.List;
  * @author odi
  */
 public interface ITransactionService {
+
     public List<TransactionDto> getAllTransactions();
+
     public List<SalesStatsDto> getMonthlySalesStats();
+
     public SalesStatsDto getThisMonthSales();
+
+    public SalesStatsDto getThisYearSales();
+
+    public SalesStatsDto getThisDaySales();
 }

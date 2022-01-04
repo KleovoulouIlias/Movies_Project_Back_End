@@ -2,14 +2,7 @@
 package com.project.GGMovies.services;
 
 import com.project.GGMovies.dtos.FilmDto;
-import com.project.GGMovies.models.Category;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-
 
 public interface IFilmService {
     

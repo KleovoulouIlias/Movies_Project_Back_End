@@ -41,5 +41,15 @@ public class TransactionSeriveImpl implements ITransactionService{
     public SalesStatsDto getThisMonthSales() {
         return transactionRepository.getThisMonthSales();
     }
+
+    @Override
+    public SalesStatsDto getThisYearSales() {
+        return transactionRepository.getThisYearSales();
+    }
+
+    @Override
+    public SalesStatsDto getThisDaySales() {
+        return transactionRepository.getThisDaySales();
+    }
     
 }

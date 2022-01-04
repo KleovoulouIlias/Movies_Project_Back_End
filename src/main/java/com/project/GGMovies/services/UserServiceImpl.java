@@ -1,5 +1,6 @@
 package com.project.GGMovies.services;
 
+import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.Role;
@@ -62,5 +63,26 @@ public class UserServiceImpl implements IUserService {
     public List<UserStatsDto> getUserStats() {
        return userRepository.getUserStats();
     }
+
+    @Override
+    public UserStatsDto getThisMonthNewUsers() {
+        return userRepository.getThisMonthNewUsers();
+    }
+
+    @Override
+    public UserStatsDto getThisYearNewUsers() {
+        return userRepository.getThisYearNewUsers();
+    }
+
+    @Override
+    public UserStatsDto getThisDayNewUsers() {
+        return userRepository.getThisDayNewUsers();
+    }
+
+   
+
+  
+
+   
    
 }

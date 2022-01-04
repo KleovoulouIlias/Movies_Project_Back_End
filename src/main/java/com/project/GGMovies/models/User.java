@@ -4,10 +4,8 @@
  */
 package com.project.GGMovies.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import com.project.GGMovies.dtos.UserDto;
-import com.project.GGMovies.services.IRoleService;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -27,7 +25,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 /**
  *

@@ -12,6 +12,12 @@ public class UserStatsDto {
         this.month = month;
         this.userCount = userCount;
     }
+    
+     public UserStatsDto(long userCount) {
+         this.userCount=userCount;
+    }
+
+    
 
     public Integer getMonth() {
         return month;

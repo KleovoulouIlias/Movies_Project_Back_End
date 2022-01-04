@@ -1,5 +1,6 @@
 package com.project.GGMovies.services;
 
+import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.User;
@@ -15,4 +16,7 @@ public interface IUserService {
     public void deleteUser(Integer id);
     public List<UserDto> getUsersByRoleId(Integer id);
     public List<UserStatsDto> getUserStats();
+    public UserStatsDto getThisMonthNewUsers();
+    public UserStatsDto getThisYearNewUsers();
+    public UserStatsDto getThisDayNewUsers();
 }

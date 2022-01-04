@@ -179,16 +179,55 @@ public class AdminController {
        
         return ResponseEntity.ok().body(result);
     }
+    
     @GetMapping("/getMonthlySalesStats")
     public ResponseEntity<List<SalesStatsDto>> getSalesStats() {
         List<SalesStatsDto>  result = iTransactionService.getMonthlySalesStats();
        
         return ResponseEntity.ok().body(result);
     }
+    
     @GetMapping("/getThisMonthSales")
     public ResponseEntity<SalesStatsDto> getThisMonthSales() {
         SalesStatsDto  result = iTransactionService.getThisMonthSales();
        
         return ResponseEntity.ok().body(result);
     }
+    
+    @GetMapping("/getThisYearSales")
+    public ResponseEntity<SalesStatsDto> getThisYearSales() {
+        SalesStatsDto  result = iTransactionService.getThisYearSales();
+       
+        return ResponseEntity.ok().body(result);
+    }
+    
+    @GetMapping("/getThisDaySales")
+    public ResponseEntity<SalesStatsDto> getThisDaySales() {
+        SalesStatsDto  result = iTransactionService.getThisDaySales();
+       
+        return ResponseEntity.ok().body(result);
+    }
+    
+    @GetMapping("/getThisMonthNewUsers")
+    public ResponseEntity<UserStatsDto> getThisMonthNewUsers() {
+        UserStatsDto result = iUserService.getThisMonthNewUsers();
+       
+        return ResponseEntity.ok().body(result);
+    }
+    
+    @GetMapping("/getThisYearNewUsers")
+    public ResponseEntity<UserStatsDto> getThisYearNewUsers() {
+        UserStatsDto result = iUserService.getThisYearNewUsers();
+       
+        return ResponseEntity.ok().body(result);
+    }
+    
+      @GetMapping("/getThisDayNewUsers")
+    public ResponseEntity<UserStatsDto> getThisDayNewUsers() {
+        UserStatsDto result = iUserService.getThisDayNewUsers();
+       
+        return ResponseEntity.ok().body(result);
+    }
+    
+    
 }
