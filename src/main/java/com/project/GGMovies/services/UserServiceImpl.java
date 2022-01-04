@@ -1,12 +1,15 @@
 package com.project.GGMovies.services;
 
 import com.project.GGMovies.dtos.UserDto;
+import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.Role;
 import com.project.GGMovies.models.User;
 import com.project.GGMovies.repos.UserRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -52,6 +55,12 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<UserDto> getUsersByRoleId(Integer id) {
         return userRepository.getUsersByRoleId(id);
+    }
+
+
+    @Override
+    public List<UserStatsDto> getUserStats() {
+       return userRepository.getUserStats();
     }
    
 }

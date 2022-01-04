@@ -5,6 +5,7 @@
  */
 package com.project.GGMovies.services;
 
+import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.TransactionDto;
 import com.project.GGMovies.models.User;
 import com.project.GGMovies.repos.TransactionRepository;
@@ -30,5 +31,10 @@ public class TransactionSeriveImpl implements ITransactionService{
         List<TransactionDto> result =  transactionRepository.getAllTransactions();
         return result;
     } 
+
+    @Override
+    public List<SalesStatsDto> getMonthlySalesStats() {
+        return transactionRepository.getMonthlySalesStats();
+    }
     
 }

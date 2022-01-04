@@ -3,8 +3,10 @@ package com.project.GGMovies.controllers;
 import com.project.GGMovies.dtos.CategoryDto;
 import com.project.GGMovies.dtos.FilmDto;
 import com.project.GGMovies.dtos.RoleDto;
+import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.TransactionDto;
 import com.project.GGMovies.dtos.UserDto;
+import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.Category;
 import com.project.GGMovies.models.User;
 import com.project.GGMovies.services.ICategoryService;
@@ -171,4 +173,16 @@ public class AdminController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/getMonthlyUserStats")
+    public ResponseEntity<List<UserStatsDto>> getUserStats() {
+        List<UserStatsDto>  result = iUserService.getUserStats();
+       
+        return ResponseEntity.ok().body(result);
+    }
+    @GetMapping("/getMonthlySalesStats")
+    public ResponseEntity<List<SalesStatsDto>> getSalesStats() {
+        List<SalesStatsDto>  result = iTransactionService.getMonthlySalesStats();
+       
+        return ResponseEntity.ok().body(result);
+    }
 }

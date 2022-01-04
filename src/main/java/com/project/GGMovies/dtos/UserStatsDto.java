@@ -3,12 +3,12 @@ package com.project.GGMovies.dtos;
 public class UserStatsDto {
     
     Integer month;
-    Integer userCount;
+    long userCount;
 
     public UserStatsDto() {
     }
 
-    public UserStatsDto(Integer month, Integer userCount) {
+    public UserStatsDto(Integer month, long userCount) {
         this.month = month;
         this.userCount = userCount;
     }
@@ -21,11 +21,11 @@ public class UserStatsDto {
         this.month = month;
     }
 
-    public Integer getUserCount() {
+    public long getUserCount() {
         return userCount;
     }
 
-    public void setUserCount(Integer userCount) {
+    public void setUserCount(long userCount) {
         this.userCount = userCount;
     }
     
