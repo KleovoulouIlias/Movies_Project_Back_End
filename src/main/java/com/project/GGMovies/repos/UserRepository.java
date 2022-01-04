@@ -1,6 +1,5 @@
 package com.project.GGMovies.repos;
 
-import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.User;
