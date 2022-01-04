@@ -7,20 +7,13 @@ import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.TransactionDto;
 import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.dtos.UserStatsDto;
-import com.project.GGMovies.models.Category;
-import com.project.GGMovies.models.User;
 import com.project.GGMovies.services.ICategoryService;
 import com.project.GGMovies.services.IFilmService;
 import com.project.GGMovies.services.IRoleService;
 import com.project.GGMovies.services.ITransactionService;
 import com.project.GGMovies.services.IUserService;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -120,7 +113,7 @@ public class AdminController {
     public void deleteUser(@PathVariable(value = "user_id") Integer id) {
         iUserService.deleteUser(id);
     }
-    // public List<UserDto> getUsersByRoleId(Integer roleId);
+    
 
     @GetMapping("/topRated/{category_id}")
     public ResponseEntity<List<FilmDto>> topRatedMoviesCategoryId(@PathVariable(value = "category_id") Integer id) {
