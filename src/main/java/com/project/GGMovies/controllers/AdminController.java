@@ -2,6 +2,7 @@ package com.project.GGMovies.controllers;
 
 import com.project.GGMovies.dtos.CategoryDto;
 import com.project.GGMovies.dtos.FilmDto;
+import com.project.GGMovies.dtos.LanguageDto;
 import com.project.GGMovies.dtos.RoleDto;
 import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.TransactionDto;
@@ -9,6 +10,7 @@ import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.services.ICategoryService;
 import com.project.GGMovies.services.IFilmService;
+import com.project.GGMovies.services.ILanguageService;
 import com.project.GGMovies.services.IRoleService;
 import com.project.GGMovies.services.ITransactionService;
 import com.project.GGMovies.services.IUserService;
@@ -40,19 +42,23 @@ public class AdminController {
 
     @Autowired
     ICategoryService iCategoryService;
-    
-    @Autowired 
+
+    @Autowired
     ITransactionService iTransactionService;
+    
+    @Autowired
+    ILanguageService iLanguageService;
 
     @GetMapping("/movies")
     public ResponseEntity<List<FilmDto>> getAllMovies() {
         return ResponseEntity.ok().body(iFilmService.getAllMovies());
     }
+
     @GetMapping("/categories")
     public ResponseEntity<List<CategoryDto>> getAllCategories() {
         return ResponseEntity.ok().body(iCategoryService.getAllCategories());
     }
-    
+
     @GetMapping("/getCategory/{category_name}")
     public ResponseEntity<CategoryDto> getCategoryByName(@PathVariable("category_name") String name) {
         return ResponseEntity.ok().body(iCategoryService.getCategoryByName(name));
@@ -67,10 +73,11 @@ public class AdminController {
             return ResponseEntity.badRequest().body(film);
         }
     }
+
     @PostMapping(value = "/updateMovie", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<FilmDto> updateMovie(@RequestBody FilmDto film) { 
-            iFilmService.insertMovie(film);
-            return ResponseEntity.ok().body(film);
+    public ResponseEntity<FilmDto> updateMovie(@RequestBody FilmDto film) {
+        iFilmService.insertMovie(film);
+        return ResponseEntity.ok().body(film);
     }
 
     @GetMapping("/deleteMovie/{film_id}")
@@ -113,22 +120,22 @@ public class AdminController {
     public void deleteUser(@PathVariable(value = "user_id") Integer id) {
         iUserService.deleteUser(id);
     }
-    
 
     @GetMapping("/topRated/{category_id}")
     public ResponseEntity<List<FilmDto>> topRatedMoviesCategoryId(@PathVariable(value = "category_id") Integer id) {
         return ResponseEntity.ok().body(iFilmService.getTopRatedMoviesByCategoryId(id));
     }
-    
+
     @GetMapping("/topRatedMovies")
     public ResponseEntity<List<FilmDto>> getTopRatedMovies() {
         return ResponseEntity.ok().body(iFilmService.getTopRatedMovies());
     }
-    
+
     @GetMapping("/mostPopularMovies")
     public ResponseEntity<List<FilmDto>> getMostPopularMovies() {
         return ResponseEntity.ok().body(iFilmService.getMostPopularMovies());
     }
+
     @GetMapping("/mostRecentMovies")
     public ResponseEntity<List<FilmDto>> getMostRecentMovies() {
         return ResponseEntity.ok().body(iFilmService.getMostRecentMovies());
@@ -157,70 +164,75 @@ public class AdminController {
 
         return ResponseEntity.ok().body(iUserService.getUsersByRoleId(id));
     }
-    
-    
+
     @GetMapping("/getAllTransactions")
     public ResponseEntity<List<TransactionDto>> getAllTransactions() {
-        List<TransactionDto>  result = iTransactionService.getAllTransactions();
-       
+        List<TransactionDto> result = iTransactionService.getAllTransactions();
+
         return ResponseEntity.ok().body(result);
     }
 
     @GetMapping("/getMonthlyUserStats")
     public ResponseEntity<List<UserStatsDto>> getUserStats() {
-        List<UserStatsDto>  result = iUserService.getUserStats();
-       
+        List<UserStatsDto> result = iUserService.getUserStats();
+
         return ResponseEntity.ok().body(result);
     }
-    
+
     @GetMapping("/getMonthlySalesStats")
     public ResponseEntity<List<SalesStatsDto>> getSalesStats() {
-        List<SalesStatsDto>  result = iTransactionService.getMonthlySalesStats();
-       
+        List<SalesStatsDto> result = iTransactionService.getMonthlySalesStats();
+
         return ResponseEntity.ok().body(result);
     }
-    
-    @GetMapping("/getThisMonthSales")
-    public ResponseEntity<SalesStatsDto> getThisMonthSales() {
-        SalesStatsDto  result = iTransactionService.getThisMonthSales();
-       
+
+    @GetMapping("/getLastTwoMonthsSales")
+    public ResponseEntity<List<SalesStatsDto>> getLastTwoMonthsSales() {
+        List<SalesStatsDto> result = iTransactionService.getLastTwoMonthsSales();
+
         return ResponseEntity.ok().body(result);
     }
-    
-    @GetMapping("/getThisYearSales")
-    public ResponseEntity<SalesStatsDto> getThisYearSales() {
-        SalesStatsDto  result = iTransactionService.getThisYearSales();
-       
+
+    @GetMapping("/getLastTwoDaysSales")
+    public ResponseEntity<List<SalesStatsDto>> getLastTwoDaysSales() {
+        List<SalesStatsDto> result = iTransactionService.getLastTwoDaysSales();
+
         return ResponseEntity.ok().body(result);
     }
-    
-    @GetMapping("/getThisDaySales")
-    public ResponseEntity<SalesStatsDto> getThisDaySales() {
-        SalesStatsDto  result = iTransactionService.getThisDaySales();
-       
+
+    @GetMapping("/getLastTwoYearsSales")
+    public ResponseEntity<List<SalesStatsDto>> getLastTwoYearsSales() {
+        List<SalesStatsDto> result = iTransactionService.getLastTwoYearsSales();
+
         return ResponseEntity.ok().body(result);
     }
-    
-    @GetMapping("/getThisMonthNewUsers")
-    public ResponseEntity<UserStatsDto> getThisMonthNewUsers() {
-        UserStatsDto result = iUserService.getThisMonthNewUsers();
-       
+
+    @GetMapping("/getLastTwoDaysUsers")
+    public ResponseEntity<List<UserStatsDto>> getLastTwoDaysUserStats() {
+        List<UserStatsDto> result = iUserService.getLastTwoDaysUserStats();
+
         return ResponseEntity.ok().body(result);
     }
-    
-    @GetMapping("/getThisYearNewUsers")
-    public ResponseEntity<UserStatsDto> getThisYearNewUsers() {
-        UserStatsDto result = iUserService.getThisYearNewUsers();
-       
+
+    @GetMapping("/getLastTwoMonthsUsers")
+    public ResponseEntity<List<UserStatsDto>> getLastTwoMonthsUserStats() {
+        List<UserStatsDto> result = iUserService.getLastTwoMonthsUserStats();
+
         return ResponseEntity.ok().body(result);
     }
-    
-      @GetMapping("/getThisDayNewUsers")
-    public ResponseEntity<UserStatsDto> getThisDayNewUsers() {
-        UserStatsDto result = iUserService.getThisDayNewUsers();
-       
+
+    @GetMapping("/getLastTwoYearsUsers")
+    public ResponseEntity<List<UserStatsDto>> getLastTwoYearsUserStats() {
+        List<UserStatsDto> result = iUserService.getLastTwoYearsUserStats();
+
         return ResponseEntity.ok().body(result);
     }
-    
-    
+
+    @GetMapping("/getLanguage/{name}")
+    public ResponseEntity<LanguageDto> getLanguageByName(@PathVariable(value = "name") String name) {
+        LanguageDto result = iLanguageService.getLanguageByName(name);
+
+        return ResponseEntity.ok().body(result);
+    }
+
 }

@@ -15,17 +15,20 @@ import org.springframework.stereotype.Service;
  * @author odi
  */
 @Service
-public class LanguageServiceImpl implements ILanguageService{
+public class LanguageServiceImpl implements ILanguageService {
 
-    @Autowired 
+    @Autowired
     LanguageRepository languageRepository;
-    
+
     @Override
     public LanguageDto getLanguageByMovieId(Integer id) {
 
-       return languageRepository.getLanguageByMovieId(id);
+        return languageRepository.getLanguageByMovieId(id);
     }
-    
-    
-    
+
+    @Override
+    public LanguageDto getLanguageByName(String name) {
+        return languageRepository.getLanguageByName(name);
+    }
+
 }

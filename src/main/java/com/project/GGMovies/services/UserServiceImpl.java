@@ -6,6 +6,8 @@ import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.Role;
 import com.project.GGMovies.models.User;
 import com.project.GGMovies.repos.UserRepository;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,10 +49,10 @@ public class UserServiceImpl implements IUserService {
     public UserDto getUserById(Integer id) {
         return userRepository.getUserById(id);
     }
-    
+
     @Override
     public void deleteUser(Integer id) {
-      userRepository.deleteById(id);
+        userRepository.deleteById(id);
     }
 
     @Override
@@ -58,31 +60,39 @@ public class UserServiceImpl implements IUserService {
         return userRepository.getUsersByRoleId(id);
     }
 
-
     @Override
     public List<UserStatsDto> getUserStats() {
-       return userRepository.getUserStats();
+        return userRepository.getUserStats();
     }
 
     @Override
-    public UserStatsDto getThisMonthNewUsers() {
-        return userRepository.getThisMonthNewUsers();
+    public List<UserStatsDto> getLastTwoDaysUserStats() {
+        LocalDate yesterdayLocalDate = LocalDate.now().minusDays(1);
+        Date yesterday = Date.valueOf(yesterdayLocalDate);
+        List<UserStatsDto> result = new ArrayList();
+        result.add(userRepository.getThisDayNewUsers(yesterday));
+        result.add(userRepository.getThisDayNewUsers());
+        return result;
     }
 
     @Override
-    public UserStatsDto getThisYearNewUsers() {
-        return userRepository.getThisYearNewUsers();
+    public List<UserStatsDto> getLastTwoMonthsUserStats() {
+        LocalDate lastStart = LocalDate.now().minusMonths(1).withDayOfMonth(1);
+        LocalDate lastEnd = LocalDate.now().minusMonths(1).withDayOfMonth(lastStart.lengthOfMonth());
+        LocalDate thisStart = LocalDate.now().withDayOfMonth(1);
+        LocalDate thisEnd = LocalDate.now().withDayOfMonth(thisStart.lengthOfMonth());
+        List<UserStatsDto> result = new ArrayList();
+        result.add(userRepository.getThisMonthNewUsers(Date.valueOf(lastStart), Date.valueOf(lastEnd)));
+        result.add(userRepository.getThisMonthNewUsers(Date.valueOf(thisStart), Date.valueOf(thisEnd)));
+        return result;
     }
 
     @Override
-    public UserStatsDto getThisDayNewUsers() {
-        return userRepository.getThisDayNewUsers();
+    public List<UserStatsDto> getLastTwoYearsUserStats() {
+        List<UserStatsDto> result = new ArrayList();
+        result.add(userRepository.getLastYearNewUsers());
+        result.add(userRepository.getThisYearNewUsers());
+        return result;
     }
 
-   
-
-  
-
-   
-   
 }
