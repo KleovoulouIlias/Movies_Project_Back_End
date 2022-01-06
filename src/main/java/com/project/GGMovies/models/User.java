@@ -83,6 +83,15 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(String email, String password, Role roleId, Date expires,boolean locked, boolean enabled) {
+        this.email = email;
+        this.password = password;
+        this.roleId = roleId;
+        this.expires = expires;
+        this.locked = locked;
+        this.enabled = enabled;
+    }
+
     public User(Integer userId) {
         this.userId = userId;
     }

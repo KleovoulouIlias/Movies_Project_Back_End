@@ -35,6 +35,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     
      @Query("SELECT new com.project.GGMovies.dtos.UserStatsDto(Count(u)) from User u where DAY(u.created)=DAY(curdate())")
      public UserStatsDto getThisDayNewUsers();
+     
+     @Query("SELECT u from User u where u.email=?1")
+     public User getUserByEmail(String email);
     
     
 }

@@ -11,4 +11,5 @@ public interface RoleRepository extends JpaRepository<Role, Integer>{
     
     @Query("SELECT new com.project.GGMovies.dtos.RoleDto(r.roleId, r.name) from Role r where r.name=?1")
     public RoleDto getRoleByRoleName(String name);
+    
 }
