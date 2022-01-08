@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.project.GGMovies.dtos;
 
 import com.project.GGMovies.models.Language;
 
-/**
- *
- * @author odi
- */
 public class LanguageDto {
     
     private Integer id;
@@ -43,6 +34,5 @@ public class LanguageDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-    
+    }   
 }

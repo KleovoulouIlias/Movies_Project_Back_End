@@ -1,6 +1,5 @@
 package com.project.GGMovies.services;
 
-import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.Role;
@@ -12,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements IUserService {

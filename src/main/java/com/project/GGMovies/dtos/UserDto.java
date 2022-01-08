@@ -24,8 +24,6 @@ public class UserDto {
         this.id = user.getUserId();
         this.userEmail = user.getEmail();
     }
-    
-    //(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId)
             
      public UserDto(Integer id, String userEmail, String password,Date dateCreated, Date dateExpires, boolean isLocked, boolean isEnabled, Integer roleId) {
         this.id = id;
@@ -59,40 +57,9 @@ public class UserDto {
         this.transactions = transactions;
     }
 
-    
-     
-
     public UserDto(Integer id){
         this.id = id;
     }
-
-//    public UserDto(Integer id, String UserEmail, String UserPassword, Date DateCreated, Date DateExpires, short isLocked, short isEnabled, String role) {
-//        this.id = id;
-//        this.UserEmail = UserEmail;
-//        this.UserPassword = UserPassword;
-//        this.DateCreated = DateCreated;
-//        this.DateExpires = DateExpires;
-//        this.isLocked = isLocked;
-//        this.isEnabled = isEnabled;
-//        //this.userList = userList;
-//        this.role = role;
-//    }
-//    @Autowired
-//    IFilmService iFilmService;
-    
-//    public UserDto(User user) {
-//        this.id = user.getUserId();
-//        this.UserEmail = user.getEmail();
-//        this.UserPassword = user.getPassword();
-//        this.DateCreated = user.getCreated();
-//        this.DateExpires = user.getExpires();
-//        this.isLocked = user.getLocked();
-//        this.isEnabled = user.getEnabled();
-//        //this.userList = iFilmService.getUserListByUserId(this.id);
-//        //this.userList = null;
-//        this.role = user.getRoleId().getName();
-//        this.transactions = user.getTransactionSet();
-//    }
 
     public Integer getId() {
         return id;
@@ -158,16 +125,6 @@ public class UserDto {
         this.roleId = roleId;
     }
 
-
-
-//    public List<FilmDto> getUserList() {
-//        return userList;
-//    }
-//
-//    public void setUserList(List<FilmDto> userList) {
-//        this.userList = userList;
-//    }
-
     public Integer getRole() {
         return roleId;
     }
@@ -182,15 +139,5 @@ public class UserDto {
 
     public void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
-    }
-
-//    public IFilmService getiFilmService() {
-//        return iFilmService;
-//    }
-//
-//    public void setiFilmService(IFilmService iFilmService) {
-//        this.iFilmService = iFilmService;
-//    }
-    
-    
+    }   
 }

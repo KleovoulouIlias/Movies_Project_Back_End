@@ -30,8 +30,6 @@ public class FilmServiceImpl implements IFilmService {
     
     @Autowired
     ILanguageService iLanguageService; 
-    
- 
 
     @Override
     public List<FilmDto> getAllMovies() {
@@ -216,8 +214,7 @@ public class FilmServiceImpl implements IFilmService {
         FilmDto result = new FilmDto(randomFilm.get(0));
         result.setCategories(iCategoryService.getCategoryByMovieId(result.getId()));
         result.setFilmLanguage(iLanguageService.getLanguageByMovieId(result.getId()));
-
-        
+ 
         return result;
     }
     

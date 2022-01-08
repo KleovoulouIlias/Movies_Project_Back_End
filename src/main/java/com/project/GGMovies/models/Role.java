@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project.GGMovies.models;
 
 import com.project.GGMovies.dtos.RoleDto;
@@ -19,10 +15,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-/**
- *
- * @author PcStratos
- */
 @Entity
 @Table(name = "role")
 @NamedQueries({
@@ -92,7 +84,6 @@ public class Role implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Role)) {
             return false;
         }
@@ -106,6 +97,5 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "com.project.GGMovies.models.Role[ roleId=" + roleId + " ]";
-    }
-    
+    } 
 }

@@ -1,19 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.project.GGMovies.dtos;
 
-import com.project.GGMovies.models.Transaction;
-import com.project.GGMovies.models.User;
 import java.math.BigDecimal;
 import java.util.Date;
 
-/**
- *
- * @author odi
- */
 public class TransactionDto {
     
     private Integer id;
@@ -25,15 +14,6 @@ public class TransactionDto {
 
     public TransactionDto() {
     }
-    
-//    public TransactionDto(Transaction transaction) {
-//        this.id = transaction.getTransactionsId();
-//        this.transactionDate = transaction.getDateTime();
-//        this.transactionAmount = transaction.getAmount();
-//        this.transactionStatus = transaction.getStatus();
-//        this.transactionType = transaction.getType();
-//        this.user = new UserDto(transaction.getUser());
-//    }
 
     public TransactionDto(Integer id, Date transactionDate, BigDecimal transactionAmount, boolean transactionStatus, String transactionType, String userEmail) {
         this.id = id;
@@ -91,8 +71,5 @@ public class TransactionDto {
     public void setUser(String userEmail) {
         this.userEmail = userEmail;
     }
-    
-
-   
-    
+  
 }

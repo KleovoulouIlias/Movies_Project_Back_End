@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -28,24 +27,15 @@ import org.springframework.stereotype.Component;
 public class JwtUtils {
 	private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-	
 	private String jwtSecret = "pagalos";
-
-	
 	private int jwtExpirationMs = 1;
         
         private int refreshExpirationDateInMs;
-        
-        //@Value("${jwt.refreshExpirationDateInMs}")
-	public void setRefreshExpirationDateInMs(int refreshExpirationDateInMs) {
-		this.refreshExpirationDateInMs = refreshExpirationDateInMs;
-	}
 
 	public String generateJwtToken(Authentication authentication) {
                 LocalDate localDate = LocalDate.now().plusMonths(1);
 		UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
                 
-                // here needs getEmail()and not getUsername() coz we dont have user name? 
 		return Jwts.builder()
 				.setSubject((userPrincipal.getEmail()))
 				.setIssuedAt(new Date())
@@ -74,7 +64,6 @@ public class JwtUtils {
 		} catch (IllegalArgumentException e) {
 			logger.error("JWT claims string is empty: {}", e.getMessage());
 		}
-
 		return false;
 	}
         
@@ -83,6 +72,9 @@ public class JwtUtils {
 		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs))
 				.signWith(SignatureAlgorithm.HS512, jwtSecret).compact();
-
 	} 
+       
+       public void setRefreshExpirationDateInMs(int refreshExpirationDateInMs) {
+		this.refreshExpirationDateInMs = refreshExpirationDateInMs;
+	}
 }

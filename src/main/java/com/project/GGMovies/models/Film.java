@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project.GGMovies.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -30,10 +26,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author PcStratos
- */
 @Entity
 @Table(name = "film")
 @NamedQueries({
@@ -68,7 +60,6 @@ public class Film implements Serializable {
     private Date releaseDate;
     @Column(name = "length")
     private Short length;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "rating")
     private BigDecimal rating;
@@ -112,7 +103,6 @@ public class Film implements Serializable {
         this.posterUrl = film.getFilmPosterUrl();
         this.popularity = film.getFilmPopularity();
         this.adultOnly = film.isFilmAdultOnly();
-        //this.categorySet = film.getCategories();
     }    
     
     public Film(Integer filmId, String title, String description, Date releaseDate, BigDecimal rating, String backgorundUrl, String posterUrl, BigDecimal popularity, boolean adultOnly) {
@@ -240,7 +230,6 @@ public class Film implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Film)) {
             return false;
         }
@@ -254,6 +243,5 @@ public class Film implements Serializable {
     @Override
     public String toString() {
         return "com.project.GGMovies.models.Film[ filmId=" + filmId + " ]";
-    }
-    
+    } 
 }

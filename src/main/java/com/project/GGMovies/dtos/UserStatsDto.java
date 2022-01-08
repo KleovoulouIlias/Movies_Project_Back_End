@@ -17,8 +17,6 @@ public class UserStatsDto {
          this.userCount=userCount;
     }
 
-    
-
     public Integer getMonth() {
         return month;
     }
@@ -33,6 +31,5 @@ public class UserStatsDto {
 
     public void setUserCount(long userCount) {
         this.userCount = userCount;
-    }
-    
+    }  
 }

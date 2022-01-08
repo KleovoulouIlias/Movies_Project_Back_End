@@ -1,11 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.project.GGMovies.models;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,10 +18,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-/**
- *
- * @author PcStratos
- */
 @Entity
 @Table(name = "transaction")
 @NamedQueries({
@@ -49,7 +39,6 @@ public class Transaction implements Serializable {
     @Column(name = "date_time")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTime;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "amount")
     private BigDecimal amount;
@@ -59,7 +48,6 @@ public class Transaction implements Serializable {
     @Basic(optional = false)
     @Column(name = "type")
     private String type;
-    //@JsonManagedReference
     @JoinColumns({
         @JoinColumn(name = "user_id", referencedColumnName = "user_id")})
     @ManyToOne(optional = false)
@@ -71,14 +59,6 @@ public class Transaction implements Serializable {
     public Transaction(Integer transactionsId) {
         this.transactionsId = transactionsId;
     }
-
-//    public Transaction(Integer transactionsId, Date dateTime, BigDecimal amount, short status, String type) {
-//        this.transactionsId = transactionsId;
-//        this.dateTime = dateTime;
-//        this.amount = amount;
-//        this.status = status;
-//        this.type = type;
-//    }
 
     public Integer getTransactionsId() {
         return transactionsId;
@@ -137,7 +117,6 @@ public class Transaction implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Transaction)) {
             return false;
         }

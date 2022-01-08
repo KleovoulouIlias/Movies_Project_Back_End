@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.project.GGMovies.request;
 
 import java.util.Set;
@@ -10,12 +5,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
-/**
- *
- * @author odi
- */
 public class SignupRequest {
-    //@NotBlank
     @Size(min = 3, max = 20)
     private String username;
  

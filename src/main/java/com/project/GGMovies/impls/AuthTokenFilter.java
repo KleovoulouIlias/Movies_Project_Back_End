@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.project.GGMovies.impls;
 
 import io.jsonwebtoken.ExpiredJwtException;
@@ -21,10 +16,6 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-/**
- *
- * @author odi
- */
 public class AuthTokenFilter extends OncePerRequestFilter {
     
   @Autowired

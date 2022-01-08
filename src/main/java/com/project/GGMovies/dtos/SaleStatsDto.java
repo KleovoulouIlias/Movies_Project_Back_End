@@ -1,4 +1,3 @@
-
 package com.project.GGMovies.dtos;
 
 import java.math.BigDecimal;
@@ -20,7 +19,6 @@ public class SaleStatsDto {
         this.sum = sum;  
     }
 
-
     public BigDecimal getSum() {
         return sum;
     }
@@ -35,7 +33,5 @@ public class SaleStatsDto {
 
     public void setMonth(Integer month) {
         this.month = month;
-    }
-        
-        
+    }      
 }

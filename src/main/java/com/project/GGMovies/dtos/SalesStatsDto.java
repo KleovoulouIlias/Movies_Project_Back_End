@@ -32,7 +32,5 @@ public class SalesStatsDto {
 
     public void setSum(BigDecimal sum) {
         this.sum = sum;
-    }
-    
-    
+    }  
 }
