@@ -85,12 +85,12 @@ public class AdminController {
         iFilmService.deleteMovie(id);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/getAllUsers")
     public ResponseEntity<List<UserDto>> getAllUsers() {
         return ResponseEntity.ok().body(iUserService.getAllUsers());
     }
 
-    @GetMapping("/test/{role_id}")
+    @GetMapping("/getRoleById/{role_id}")
     public ResponseEntity<RoleDto> getRoleById(@PathVariable("role_id") Integer id) {
         return ResponseEntity.ok().body(iRoleService.getRoleById(id));
     }
@@ -105,7 +105,7 @@ public class AdminController {
         return ResponseEntity.ok().body(iUserService.getUserById(id));
     }
 
-    @PostMapping("/getFormJson")
+    @PostMapping("/insertUser")
     public ResponseEntity<UserDto> insertNewUser(@RequestBody UserDto user) {
 
         if (!iUserService.isUsedEmail(user.getUserEmail())) {
@@ -159,7 +159,7 @@ public class AdminController {
         return ResponseEntity.ok().body(iFilmService.getMostPopularMoviesByCategoryId(id));
     }
 
-    @GetMapping("/userByRole/{user_id}")
+    @GetMapping("/getUsersByRoleId/{user_id}")
     public ResponseEntity<List<UserDto>> getUsersByRoleId(@PathVariable(value = "user_id") Integer id) {
 
         return ResponseEntity.ok().body(iUserService.getUsersByRoleId(id));

@@ -173,4 +173,12 @@ public class FilmDto {
     public void setFilmLanguage(LanguageDto filmLanguage) {
         this.filmLanguage = filmLanguage;
     }   
+
+    public String getLanguageName() {
+        return languageName;
+    }
+
+    public void setLanguageName(String languageName) {
+        this.languageName = languageName;
+    }
 }

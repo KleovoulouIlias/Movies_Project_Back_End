@@ -99,6 +99,7 @@ public class Film implements Serializable {
         this.description = film.getFilmDescription();
         this.releaseDate = film.getFilmReleaseDate();
         this.rating = film.getFilmRating();
+        this.length = film.getFilmLength();
         this.backgorundUrl = film.getFilmBackgorundUrl();
         this.posterUrl = film.getFilmPosterUrl();
         this.popularity = film.getFilmPopularity();

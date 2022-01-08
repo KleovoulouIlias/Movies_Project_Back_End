@@ -13,16 +13,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.password, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u")
+    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u")
     public List<UserDto> getAllUsers();
 
     @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId) from User u where u.email=?1")
     public UserDto checkUserById(String email);
 
-    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.password, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.userId=?1")
+    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.userId=?1")
     public UserDto getUserById(Integer id);
 
-    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.password, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.roleId.roleId=?1")
+    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.roleId.roleId=?1")
     public List<UserDto> getUsersByRoleId(Integer roleId);
 
     @Query("SELECT new com.project.GGMovies.dtos.UserStatsDto(Month(u.created),Count(u)) from User u where Year(u.created)=Year(curdate()) GROUP BY Month(u.created)")
