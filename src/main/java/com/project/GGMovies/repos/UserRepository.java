@@ -25,12 +25,18 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.roleId.roleId=?1")
     public List<UserDto> getUsersByRoleId(Integer roleId);
 
+    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.roleId.roleId<>?1")
+    public List<UserDto> getAllUsersExeptByRoleId(Integer roleId);
+
     @Query("SELECT new com.project.GGMovies.dtos.UserStatsDto(Month(u.created),Count(u)) from User u where Year(u.created)=Year(curdate()) GROUP BY Month(u.created)")
     public List<UserStatsDto> getUserStats();
 
     @Query("SELECT u from User u where u.email=?1")
     public User getUserByEmail(String email);
 
+    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.email=?1")
+    public UserDto getUserDtoByEmail(String email);
+    
     @Query("SELECT new com.project.GGMovies.dtos.UserStatsDto(Count(u)) from User u where Date(u.created)=curdate()")
     public UserStatsDto getThisDayNewUsers();
 

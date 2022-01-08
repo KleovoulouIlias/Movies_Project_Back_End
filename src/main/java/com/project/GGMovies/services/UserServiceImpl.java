@@ -93,4 +93,14 @@ public class UserServiceImpl implements IUserService {
         return result;
     }
 
+    @Override
+    public UserDto getUserDtoByEmail(String email) {
+        return userRepository.getUserDtoByEmail(email);
+    }
+
+    @Override
+    public List<UserDto> getAllUsersExeptByRoleId(Integer roleId) {
+        return userRepository.getAllUsersExeptByRoleId(roleId);
+    }
+
 }

@@ -118,8 +118,17 @@ public class AdminController {
     
     @PostMapping("/updateUser")
     public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user) {
-        iUserService.insertUser(user);
-        return ResponseEntity.ok().body(user);
+        if (iUserService.isUsedEmail(user.getUserEmail())) {
+            if(iUserService.getUserDtoByEmail(user.getUserEmail()).getId()== user.getId()){
+                iUserService.insertUser(user);
+                return ResponseEntity.ok().body(user);
+            }else{
+            return ResponseEntity.badRequest().body(user);
+            }
+        } else {
+            iUserService.insertUser(user);
+            return ResponseEntity.ok().body(user);
+        }
     }
 
     @GetMapping("/deleteUser/{user_id}")
@@ -169,6 +178,12 @@ public class AdminController {
     public ResponseEntity<List<UserDto>> getUsersByRoleId(@PathVariable(value = "user_id") Integer id) {
 
         return ResponseEntity.ok().body(iUserService.getUsersByRoleId(id));
+    }
+
+    @GetMapping("/getAllUsersExeptByRoleId/{user_id}")
+    public ResponseEntity<List<UserDto>> getAllUsersExeptByRoleId(@PathVariable(value = "user_id") Integer id) {
+
+        return ResponseEntity.ok().body(iUserService.getAllUsersExeptByRoleId(id));
     }
 
     @GetMapping("/getAllTransactions")
