@@ -22,7 +22,7 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query("SELECT new com.project.GGMovies.dtos.TransactionDto(t.transactionsId, t.dateTime, t.amount, t.status, t.type, t.user.email) from Transaction t")
     public List<TransactionDto> getAllTransactions();
 
-    @Query("SELECT new com.project.GGMovies.dtos.SalesStatsDto(Month(t.dateTime),Sum(t.amount)) from Transaction t where t.status = true GROUP BY Month(t.dateTime)")
+    @Query("SELECT new com.project.GGMovies.dtos.SalesStatsDto(Month(t.dateTime),Sum(t.amount)) from Transaction t where t.status = true and Year(t.dateTime)=Year(curdate()) GROUP BY Month(t.dateTime)")
     public List<SalesStatsDto> getMonthlySalesStats();
 
     @Query("SELECT new com.project.GGMovies.dtos.SalesStatsDto(Sum(t.amount)) from Transaction t where t.status = true and date(t.dateTime)>?1 and date(t.dateTime)<?2")

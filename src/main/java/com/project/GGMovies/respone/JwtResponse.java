@@ -36,11 +36,11 @@ public class JwtResponse {
         return refreshToken;
     }
 
-    public JwtResponse(Integer userId, String email, List<String> roles, String refreshToken) {
+    public JwtResponse(Integer userId, String email, List<String> roles, String token) {
         this.userId = userId;
         this.email = email;
         this.roles = roles;
-        this.refreshToken = refreshToken;
+        this.token = token;
     }
 
     public void setRefreshToken(String refreshToken) {
