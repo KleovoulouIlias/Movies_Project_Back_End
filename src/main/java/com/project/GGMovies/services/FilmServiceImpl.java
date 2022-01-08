@@ -217,5 +217,10 @@ public class FilmServiceImpl implements IFilmService {
  
         return result;
     }
+
+    @Override
+    public List<FilmDto> getAllMovies2() { 
+        return filmRepository.getAllMovies2();
+    }
     
 }

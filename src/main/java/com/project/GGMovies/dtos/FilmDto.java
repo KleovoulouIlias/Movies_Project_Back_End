@@ -19,12 +19,22 @@ public class FilmDto {
     private BigDecimal filmPopularity;
     private boolean filmAdultOnly;
     private LanguageDto filmLanguage;
+    private String languageName;
 
     public FilmDto() {
     }
     
     public FilmDto(Integer id){
         this.id = id;
+    }
+
+    public FilmDto(Integer id, String filmTitle, Date filmReleaseDate, String filmPosterUrl, String languageName, boolean filmAdultOnly) {
+        this.id = id;
+        this.filmTitle = filmTitle;
+        this.filmReleaseDate = filmReleaseDate;
+        this.filmPosterUrl = filmPosterUrl;
+        this.languageName = languageName;
+        this.filmAdultOnly = filmAdultOnly; 
     }
 
     public FilmDto(Integer id, String filmTitle, String filmDescription, Date filmReleaseDate, Short filmLength, BigDecimal filmRating, String filmBackgorundUrl, String filmPosterUrl, BigDecimal filmPopularity, boolean filmAdultOnly, List<CategoryDto> categories) {

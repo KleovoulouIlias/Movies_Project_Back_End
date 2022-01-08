@@ -21,4 +21,5 @@ public interface IFilmService {
      public List<FilmDto> getMostRecentMovies();
      public FilmDto getRandomMovie();
      public FilmDto getMovieById(Integer id);
+     public List<FilmDto> getAllMovies2();
 }

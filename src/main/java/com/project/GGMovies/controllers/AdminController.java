@@ -51,7 +51,7 @@ public class AdminController {
 
     @GetMapping("/movies")
     public ResponseEntity<List<FilmDto>> getAllMovies() {
-        return ResponseEntity.ok().body(iFilmService.getAllMovies());
+        return ResponseEntity.ok().body(iFilmService.getAllMovies2());
     }
 
     @GetMapping("/categories")
@@ -233,6 +233,13 @@ public class AdminController {
         LanguageDto result = iLanguageService.getLanguageByName(name);
 
         return ResponseEntity.ok().body(result);
+    }
+    
+    @GetMapping("/getMovieByID/{id}")
+    public ResponseEntity<FilmDto> getFilmByID(@PathVariable(value = "id") Integer id) {
+        FilmDto film = iFilmService.getMovieById(id);
+
+        return ResponseEntity.ok().body(film);
     }
 
 }

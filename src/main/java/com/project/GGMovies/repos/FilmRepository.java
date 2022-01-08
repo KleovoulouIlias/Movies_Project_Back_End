@@ -52,5 +52,8 @@ public interface FilmRepository extends JpaRepository<Film, Integer> {
     
     @Query("select f from Film f order by rand()")
     public List<Film> getRandomMovie(Pageable pageable);
+    
+    @Query("SELECT new com.project.GGMovies.dtos.FilmDto(f.filmId, f.title, f.releaseDate, f.posterUrl, f.language.name, f.adultOnly) from Film f")
+    public List<FilmDto> getAllMovies2();
 
 }
