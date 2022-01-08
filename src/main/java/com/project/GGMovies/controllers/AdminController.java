@@ -115,6 +115,12 @@ public class AdminController {
             return ResponseEntity.badRequest().body(user);
         }
     }
+    
+    @PostMapping("/updateUser")
+    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user) {
+        iUserService.insertUser(user);
+        return ResponseEntity.ok().body(user);
+    }
 
     @GetMapping("/deleteUser/{user_id}")
     public void deleteUser(@PathVariable(value = "user_id") Integer id) {
