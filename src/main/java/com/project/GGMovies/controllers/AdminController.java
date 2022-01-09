@@ -8,16 +8,26 @@ import com.project.GGMovies.dtos.SalesStatsDto;
 import com.project.GGMovies.dtos.TransactionDto;
 import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.dtos.UserStatsDto;
+import com.project.GGMovies.models.Role;
+import com.project.GGMovies.models.User;
+import com.project.GGMovies.repos.UserRepository;
+import com.project.GGMovies.request.AdminSignup;
+import com.project.GGMovies.request.SignupRequest;
+import com.project.GGMovies.respone.MessageResponse;
 import com.project.GGMovies.services.ICategoryService;
 import com.project.GGMovies.services.IFilmService;
 import com.project.GGMovies.services.ILanguageService;
 import com.project.GGMovies.services.IRoleService;
 import com.project.GGMovies.services.ITransactionService;
 import com.project.GGMovies.services.IUserService;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,6 +58,12 @@ public class AdminController {
     
     @Autowired
     ILanguageService iLanguageService;
+    
+    @Autowired
+    PasswordEncoder encoder;
+    
+    @Autowired
+    UserRepository userRepository;
 
     @GetMapping("/movies")
     public ResponseEntity<List<FilmDto>> getAllMovies() {
@@ -261,6 +277,25 @@ public class AdminController {
         FilmDto film = iFilmService.getMovieById(id);
 
         return ResponseEntity.ok().body(film);
+    }
+    
+    @PostMapping("/createUser")
+    public ResponseEntity<?> createUser(@Valid @RequestBody AdminSignup adminSignup) {
+        boolean locked = adminSignup.isLocked();
+        boolean enabled = adminSignup.isEnabled();
+
+        Role roles = new Role();
+        roles.setRoleId(adminSignup.getRoleId());
+
+        Date expires = adminSignup.getExpires();
+
+        User user = new User(adminSignup.getEmail(),
+                encoder.encode(adminSignup.getPassword()),
+                roles, expires, locked, enabled);
+
+        userRepository.save(user);
+
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
 }

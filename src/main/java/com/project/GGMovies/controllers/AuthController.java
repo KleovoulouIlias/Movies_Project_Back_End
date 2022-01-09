@@ -7,6 +7,7 @@ import com.project.GGMovies.models.Role;
 import com.project.GGMovies.models.User;
 import com.project.GGMovies.repos.RoleRepository;
 import com.project.GGMovies.repos.UserRepository;
+import com.project.GGMovies.request.AdminSignup;
 import com.project.GGMovies.request.LoginRequest;
 import com.project.GGMovies.request.SignupRequest;
 import java.util.Map.Entry;
@@ -14,6 +15,7 @@ import com.project.GGMovies.respone.JwtResponse;
 import com.project.GGMovies.respone.MessageResponse;
 import com.project.GGMovies.services.IUserService;
 import io.jsonwebtoken.impl.DefaultClaims;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -64,7 +66,7 @@ public class AuthController {
     public ResponseEntity<?> checkEmail(@PathVariable("email") String email) {
 
         if (userRepository.getUserByEmail(email)==null) {
-            return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+            return ResponseEntity.ok(new MessageResponse(""));
         } else {
             return ResponseEntity.badRequest().body(email);
         }
@@ -109,6 +111,7 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+    
 
 /*   @GetMapping(value = "/refreshtoken")
 	public ResponseEntity<?> refreshtoken(HttpServletRequest request) throws Exception {

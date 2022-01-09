@@ -4,6 +4,7 @@ import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.Role;
 import com.project.GGMovies.models.User;
+import com.project.GGMovies.models.UserList;
 import com.project.GGMovies.repos.UserRepository;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -39,6 +40,7 @@ public class UserServiceImpl implements IUserService {
     @Override
     public void insertUser(UserDto newUser) {
         User userToInsert = new User(newUser);
+        userToInsert.setUserList(new UserList());
         userToInsert.setRoleId(new Role(IRoleService.getRoleById(newUser.getRole())));
         userRepository.saveAndFlush(userToInsert);
     }
