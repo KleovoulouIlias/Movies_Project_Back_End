@@ -55,13 +55,13 @@ public class AdminController {
 
     @Autowired
     ITransactionService iTransactionService;
-    
+
     @Autowired
     ILanguageService iLanguageService;
-    
+
     @Autowired
     PasswordEncoder encoder;
-    
+
     @Autowired
     UserRepository userRepository;
 
@@ -131,22 +131,21 @@ public class AdminController {
             return ResponseEntity.badRequest().body(user);
         }
     }
-    
-    @PostMapping("/updateUser")
-    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user) {
-        if (iUserService.isUsedEmail(user.getUserEmail())) {
-            if(iUserService.getUserDtoByEmail(user.getUserEmail()).getId()== user.getId()){
-                iUserService.insertUser(user);
-                return ResponseEntity.ok().body(user);
-            }else{
-            return ResponseEntity.badRequest().body(user);
-            }
-        } else {
-            iUserService.insertUser(user);
-            return ResponseEntity.ok().body(user);
-        }
-    }
 
+//    @PostMapping("/updateUser")
+//    public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user) {
+//        if (iUserService.isUsedEmail(user.getUserEmail())) {
+//            if (iUserService.getUserDtoByEmail(user.getUserEmail()).getId() == user.getId()) {
+//                iUserService.insertUser(user);
+//                return ResponseEntity.ok().body(user);
+//            } else {
+//                return ResponseEntity.badRequest().body(user);
+//            }
+//        } else {
+//            iUserService.insertUser(user);
+//            return ResponseEntity.ok().body(user);
+//        }
+//    }
     @GetMapping("/deleteUser/{user_id}")
     public void deleteUser(@PathVariable(value = "user_id") Integer id) {
         iUserService.deleteUser(id);
@@ -271,31 +270,65 @@ public class AdminController {
 
         return ResponseEntity.ok().body(result);
     }
-    
+
     @GetMapping("/getMovieByID/{id}")
     public ResponseEntity<FilmDto> getFilmByID(@PathVariable(value = "id") Integer id) {
         FilmDto film = iFilmService.getMovieById(id);
 
         return ResponseEntity.ok().body(film);
     }
-    
+
     @PostMapping("/createUser")
     public ResponseEntity<?> createUser(@Valid @RequestBody AdminSignup adminSignup) {
-        boolean locked = adminSignup.isLocked();
-        boolean enabled = adminSignup.isEnabled();
+        if (!iUserService.isUsedEmail(adminSignup.getEmail())) {
+            boolean locked = adminSignup.isLocked();
+            boolean enabled = adminSignup.isEnabled();
+            Role roles = new Role();
+            roles.setRoleId(adminSignup.getRoleId());
+            Date expires = adminSignup.getExpires();
+            User user = new User(adminSignup.getEmail(),
+                    encoder.encode(adminSignup.getPassword()),
+                    roles, expires, locked, enabled);
+            userRepository.save(user);
+            return ResponseEntity.ok().body(userRepository.getUserById(adminSignup.getId()));
+        }else{
+            return ResponseEntity.badRequest().body(userRepository.getUserById(adminSignup.getId()));
+        }
+    }
 
-        Role roles = new Role();
-        roles.setRoleId(adminSignup.getRoleId());
-
-        Date expires = adminSignup.getExpires();
-
-        User user = new User(adminSignup.getEmail(),
-                encoder.encode(adminSignup.getPassword()),
-                roles, expires, locked, enabled);
-
-        userRepository.save(user);
-
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    @PostMapping("/updateUser")
+    public ResponseEntity<UserDto> updateUser(@Valid @RequestBody AdminSignup adminSignup) {
+        System.out.println("fdfd");
+        if (iUserService.isUsedEmail(adminSignup.getEmail())) {
+            if (iUserService.getUserDtoByEmail(adminSignup.getEmail()).getId() == adminSignup.getId()) {
+                boolean locked = adminSignup.isLocked();
+                boolean enabled = adminSignup.isEnabled();
+                Role roles = new Role();
+                roles.setRoleId(adminSignup.getRoleId());
+                Date expires = adminSignup.getExpires();
+                User user = new User(adminSignup.getId(),adminSignup.getEmail(),
+                        encoder.encode(adminSignup.getPassword()),
+                        roles, expires, locked, enabled);
+                userRepository.save(user);
+                return ResponseEntity.ok().body(userRepository.getUserById(adminSignup.getId()));
+            } else {
+                return ResponseEntity.badRequest().body(userRepository.getUserById(adminSignup.getId()));
+            }
+        } else {
+            boolean locked = adminSignup.isLocked();
+                boolean enabled = adminSignup.isEnabled();
+                Role roles = new Role();
+                roles.setRoleId(adminSignup.getRoleId());
+                Date expires = adminSignup.getExpires();
+                User user = new User();
+                if(adminSignup.getPassword()==null){
+                    user = new User(adminSignup.getId(),userRepository.findById(adminSignup.getId()).get().getPassword(),adminSignup.getEmail(),roles, expires, locked, enabled);
+                }else{
+                    user = new User(adminSignup.getId(),adminSignup.getEmail(),encoder.encode(adminSignup.getPassword()),roles, expires, locked, enabled);
+                }
+                userRepository.save(user);
+                return ResponseEntity.ok().body(userRepository.getUserById(adminSignup.getId()));
+        }
     }
 
 }

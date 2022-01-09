@@ -24,9 +24,18 @@ public class AdminSignup {
     private boolean locked;
     private Date expires;
     private Integer roleId;
+    private int id;
 
     public Integer getRoleId() {
         return roleId;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setRoleId(Integer roleId) {
