@@ -11,6 +11,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -103,6 +104,13 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<UserDto> getAllUsersExeptByRoleId(Integer roleId) {
         return userRepository.getAllUsersExeptByRoleId(roleId);
+    }
+
+    @Override
+    public List<UserDto> getLastUsers() {
+        List<UserDto> result = new ArrayList();
+        result = userRepository.getLastUsers(PageRequest.of(0, 8));
+        return result;
     }
 
 }

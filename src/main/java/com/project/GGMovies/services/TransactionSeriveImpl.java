@@ -8,6 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -57,6 +58,13 @@ public class TransactionSeriveImpl implements ITransactionService {
         List<SalesStatsDto> result = new ArrayList();
         result.add(transactionRepository.getLastYearSales());
         result.add(transactionRepository.getThisYearSales());
+        return result;
+    }
+
+    @Override
+    public List<TransactionDto> getLastTransactions() {
+        List<TransactionDto> result = new ArrayList();
+        result = transactionRepository.getLastTransactions(PageRequest.of(0, 8));
         return result;
     }
 

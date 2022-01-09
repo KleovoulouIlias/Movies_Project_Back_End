@@ -28,5 +28,6 @@ public interface IUserService {
     public List<UserStatsDto> getLastTwoYearsUserStats();
     public UserDto getUserDtoByEmail(String email);
     public List<UserDto> getAllUsersExeptByRoleId(Integer roleId);
+    public List<UserDto> getLastUsers();
 
 }

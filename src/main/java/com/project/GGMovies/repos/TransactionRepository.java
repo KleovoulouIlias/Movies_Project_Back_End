@@ -5,6 +5,7 @@ import com.project.GGMovies.dtos.TransactionDto;
 import com.project.GGMovies.models.Transaction;
 import java.sql.Date;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -31,4 +32,6 @@ public interface TransactionRepository extends JpaRepository<Transaction, Intege
     @Query("SELECT new com.project.GGMovies.dtos.SalesStatsDto(Sum(t.amount)) from Transaction t where t.status = true and Year(t.dateTime)=Year(curdate())-1")
     public SalesStatsDto getLastYearSales();
 
+    @Query("SELECT new com.project.GGMovies.dtos.TransactionDto(t.transactionsId, t.dateTime, t.amount, t.status, t.type, t.user.email) from Transaction t ORDER BY (t.dateTime) desc")
+    public List<TransactionDto> getLastTransactions(Pageable pageable);
 }

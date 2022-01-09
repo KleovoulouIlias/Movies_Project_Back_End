@@ -208,6 +208,12 @@ public class AdminController {
         return ResponseEntity.ok().body(result);
     }
 
+    @GetMapping("/getLastTransactions")
+    public ResponseEntity<List<TransactionDto>> getLastTransactions() {
+
+        return ResponseEntity.ok().body(iTransactionService.getLastTransactions());
+    }
+
     @GetMapping("/getMonthlyUserStats")
     public ResponseEntity<List<UserStatsDto>> getUserStats() {
         List<UserStatsDto> result = iUserService.getUserStats();
@@ -278,6 +284,12 @@ public class AdminController {
         return ResponseEntity.ok().body(film);
     }
 
+    @GetMapping("/getLastUsers")
+    public ResponseEntity<List<UserDto>> getLastUsers() {
+
+        return ResponseEntity.ok().body(iUserService.getLastUsers());
+    }
+
     @PostMapping("/createUser")
     public ResponseEntity<?> createUser(@Valid @RequestBody AdminSignup adminSignup) {
         if (!iUserService.isUsedEmail(adminSignup.getEmail())) {
@@ -291,7 +303,7 @@ public class AdminController {
                     roles, expires, locked, enabled);
             userRepository.save(user);
             return ResponseEntity.ok().body(userRepository.getUserById(adminSignup.getId()));
-        }else{
+        } else {
             return ResponseEntity.badRequest().body(userRepository.getUserById(adminSignup.getId()));
         }
     }
@@ -306,7 +318,7 @@ public class AdminController {
                 Role roles = new Role();
                 roles.setRoleId(adminSignup.getRoleId());
                 Date expires = adminSignup.getExpires();
-                User user = new User(adminSignup.getId(),adminSignup.getEmail(),
+                User user = new User(adminSignup.getId(), adminSignup.getEmail(),
                         encoder.encode(adminSignup.getPassword()),
                         roles, expires, locked, enabled);
                 userRepository.save(user);
@@ -316,18 +328,18 @@ public class AdminController {
             }
         } else {
             boolean locked = adminSignup.isLocked();
-                boolean enabled = adminSignup.isEnabled();
-                Role roles = new Role();
-                roles.setRoleId(adminSignup.getRoleId());
-                Date expires = adminSignup.getExpires();
-                User user = new User();
-                if(adminSignup.getPassword()==null){
-                    user = new User(adminSignup.getId(),userRepository.findById(adminSignup.getId()).get().getPassword(),adminSignup.getEmail(),roles, expires, locked, enabled);
-                }else{
-                    user = new User(adminSignup.getId(),adminSignup.getEmail(),encoder.encode(adminSignup.getPassword()),roles, expires, locked, enabled);
-                }
-                userRepository.save(user);
-                return ResponseEntity.ok().body(userRepository.getUserById(adminSignup.getId()));
+            boolean enabled = adminSignup.isEnabled();
+            Role roles = new Role();
+            roles.setRoleId(adminSignup.getRoleId());
+            Date expires = adminSignup.getExpires();
+            User user = new User();
+            if (adminSignup.getPassword() == null) {
+                user = new User(adminSignup.getId(), userRepository.findById(adminSignup.getId()).get().getPassword(), adminSignup.getEmail(), roles, expires, locked, enabled);
+            } else {
+                user = new User(adminSignup.getId(), adminSignup.getEmail(), encoder.encode(adminSignup.getPassword()), roles, expires, locked, enabled);
+            }
+            userRepository.save(user);
+            return ResponseEntity.ok().body(userRepository.getUserById(adminSignup.getId()));
         }
     }
 

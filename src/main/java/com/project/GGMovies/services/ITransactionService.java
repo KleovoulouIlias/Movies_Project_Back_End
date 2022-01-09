@@ -15,4 +15,6 @@ public interface ITransactionService {
     public List<SalesStatsDto> getLastTwoDaysSales();
 
     public List<SalesStatsDto> getLastTwoYearsSales();
+    
+    public List<TransactionDto> getLastTransactions();
 }

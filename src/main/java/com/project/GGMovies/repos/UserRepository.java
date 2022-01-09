@@ -5,6 +5,7 @@ import com.project.GGMovies.dtos.UserStatsDto;
 import com.project.GGMovies.models.User;
 import java.sql.Date;
 import java.util.List;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -36,7 +37,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u where u.email=?1")
     public UserDto getUserDtoByEmail(String email);
-    
+
     @Query("SELECT new com.project.GGMovies.dtos.UserStatsDto(Count(u)) from User u where Date(u.created)=curdate()")
     public UserStatsDto getThisDayNewUsers();
 
@@ -52,4 +53,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("SELECT new com.project.GGMovies.dtos.UserStatsDto(Count(u)) from User u where Year(u.created)=Year(curdate())-1")
     public UserStatsDto getLastYearNewUsers();
 
+    @Query("SELECT new com.project.GGMovies.dtos.UserDto(u.userId, u.email, u.created, u.expires, u.locked, u.enabled, u.roleId.roleId) from User u ORDER BY (u.created) desc")
+    public List<UserDto> getLastUsers(Pageable pageable);
 }
