@@ -1,5 +1,6 @@
 package com.project.GGMovies.controllers;
 
+import com.project.GGMovies.dtos.UserDto;
 import com.project.GGMovies.impls.JwtUtils;
 import com.project.GGMovies.impls.UserDetailsImpl;
 import com.project.GGMovies.models.Role;
@@ -11,6 +12,7 @@ import com.project.GGMovies.request.SignupRequest;
 import java.util.Map.Entry;
 import com.project.GGMovies.respone.JwtResponse;
 import com.project.GGMovies.respone.MessageResponse;
+import com.project.GGMovies.services.IUserService;
 import io.jsonwebtoken.impl.DefaultClaims;
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -29,6 +31,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +58,19 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    
+    
+    @GetMapping("/checkEmail/{email}")
+    public ResponseEntity<?> checkEmail(@PathVariable("email") String email) {
+
+        if (userRepository.getUserByEmail(email)==null) {
+            return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+        } else {
+            return ResponseEntity.badRequest().body(email);
+        }
+    }
+    
+    
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
